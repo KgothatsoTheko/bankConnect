@@ -1,0 +1,92 @@
+.full-height {
+    height: 100%;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.flex{
+    display: flex;
+}
+
+.gap{
+    gap: .5em;
+}
+
+.column{
+    flex-direction: column;
+}
+
+.width-80 {
+    width: 90%;
+    height: 90%;
+    border-radius: 20px;
+}
+
+.center-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn{
+    border: 20px;
+    background-color:#ff9f68;
+}
+
+.left {
+    width: 30%;
+    height: 100%;
+    border-right: groove;
+    // background-color: red;
+}
+
+.right {
+    width: 70%;
+    height: 100%;
+    position: relative;
+    background-color: purple;
+}
+
+.content-div {
+    width: 80%;
+    height: 80%;
+    overflow: hidden;
+    box-shadow: 5px 3px 10px 4px;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.mat-input{
+    width: 80%;
+    p:hover{
+        text-decoration: underline;
+        color: blue;
+        cursor: pointer;
+    }
+}
+.pointer{
+    cursor: pointer;
+    :hover{
+        color: blue;
+        text-decoration: underline;
+    }
+}
+.space-between{
+justify-content: space-between;
+align-items: center;
+}
+
+.align{
+    align-items: center;
+}
+
+.end{
+    align-items: end;
+}
+
+.justify-center{
+    justify-content: center;
+}
+
