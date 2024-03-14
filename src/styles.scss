@@ -91,3 +91,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     margin-top: 1em;
 }
 
+
+.mat-mdc-form-field-infix{
+    // padding: 0 !important;
+    background-color: white !important;
+}
+
+.mat-mdc-raised-button{
+    background-color: #ff9f68 !important;
+    border-radius: 20px !important;
+}
+
+.mat-mdc-text-field-wrapper {
+    padding: 0 !important;
+}
+
