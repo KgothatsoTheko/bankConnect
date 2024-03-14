@@ -1,0 +1,66 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+  body{
+    font-family: sans-serif;
+  }
+
+  //flex
+  .flex{
+    display: flex;
+  }
+
+  .center-center{
+    justify-content: center;
+    align-items: center;
+  }
+
+  .spacebetween{
+    justify-content: space-between;
+  }
+
+  .text-align{
+    text-align: center;
+  }
+
+  //gap
+  .gap-1{
+    gap: 1em;
+  }
+
+  .gap-05{
+    gap: .5em;
+  }
+
+  mat-toolbar{
+    background-color: #ffffff;
+    border-bottom: 0.5px solid lightgray;
+    height: 79%;
+  }
+
+  img{
+    height: 100%;
+    width: 20%;
+  }
+
+  .logo{
+    height: 100%;
+    width: 100%;
+  }
+
+  //pages
+  .pages{
+    background-size: 100%;
+    height: 100%;
+  }
+
+  .pages-container{
+    height: 100%;
+  }
+
+  .pages:hover{
+    border-bottom: 3px solid orange;
+    color: orange;
+    cursor: pointer;
+  }
