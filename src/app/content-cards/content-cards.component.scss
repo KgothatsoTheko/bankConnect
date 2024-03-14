@@ -1,0 +1,64 @@
+.container{
+    overflow: hidden;
+    }
+    
+    body{
+        font-family: sans-serif;
+    }
+    
+    .container{
+      height: 0%;
+    }
+    
+    .content{
+        width: 80%;
+        height: 25%;
+        border: 2px solid grey;
+        border-radius: 7px;
+        overflow: hidden;
+        box-shadow: 2px 3px;
+        animation-name: slideLeft;
+        animation-duration: 2s;
+        animation-iteration-count: 1;
+        animation-direction: alternate;
+        animation-play-state: running;
+        animation-timing-function: ease-in-out;
+    }
+    
+    .content:hover{
+      cursor: pointer;
+      border: 2px solid orange;
+    }
+    
+     //flex
+     .flex{
+        display: flex;
+      }
+    
+      .center-center{
+        justify-content: center;
+        align-items: center;
+      }
+    
+      .spacebetween{
+        justify-content: space-between;
+      }
+    
+      .text-align{
+        text-align: center;
+      }
+    
+      //gap
+      .gap-1{
+        gap: 1em;
+      }
+    
+      .gap-05{
+        gap: .5em;
+      }
+    
+    @keyframes slideLeft{
+        from{transform: translateX(300%)}
+    }
+    
+    

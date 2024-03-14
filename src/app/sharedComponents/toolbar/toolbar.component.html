@@ -1,0 +1,11 @@
+<mat-toolbar>
+    <div class="logo">
+        <img src="../../../assets/images/logo.png"  alt="">
+    </div>
+
+    <div class="pages-container flex gap-05">
+        <div class="pages flex center-center gap-05" *ngFor="let items of menuItems, ">
+            {{items}}
+           </div>
+    </div>
+ </mat-toolbar>
