@@ -15,6 +15,7 @@ import { ContentCardsComponent } from './content-cards/content-cards.component';
 import { NgChartsModule } from 'ng2-charts';
 import { DemographLineComponent } from './charts/demograph-line/demograph-line.component';
 import { LeadsComponent } from './components/leads/leads.component';
+import { ReportsComponent } from './components/reports/reports.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { LeadsComponent } from './components/leads/leads.component';
     ContentCardsComponent,
     DemographLineComponent,
     LeadsComponent,
+    ReportsComponent,
   ],
   imports: [
     BrowserModule,
