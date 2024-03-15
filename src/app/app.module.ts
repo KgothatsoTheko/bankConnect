@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './modules/material/material.module';
 import { LoginComponent } from './components/login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CustomerComponent } from './components/customer/customer.component';
 import { ToolbarComponent } from './sharedComponents/toolbar/toolbar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BarComponent } from './charts/bar/bar.component';
@@ -18,6 +20,7 @@ import { LeadsComponent } from './components/leads/leads.component';
   declarations: [
     AppComponent,
     LoginComponent,
+    CustomerComponent,
     ToolbarComponent,
     DashboardComponent,
     BarComponent,
@@ -30,6 +33,7 @@ import { LeadsComponent } from './components/leads/leads.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    ReactiveFormsModule,
     NgChartsModule
   ],
   providers: [],
