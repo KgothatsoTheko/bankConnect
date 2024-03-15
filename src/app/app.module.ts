@@ -8,19 +8,33 @@ import { MaterialModule } from './modules/material/material.module';
 import { LoginComponent } from './components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CustomerComponent } from './components/customer/customer.component';
+import { ToolbarComponent } from './sharedComponents/toolbar/toolbar.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { BarComponent } from './charts/bar/bar.component';
+import { ContentCardsComponent } from './content-cards/content-cards.component';
+import { NgChartsModule } from 'ng2-charts';
+import { DemographLineComponent } from './charts/demograph-line/demograph-line.component';
+import { LeadsComponent } from './components/leads/leads.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    CustomerComponent
+    CustomerComponent,
+    ToolbarComponent,
+    DashboardComponent,
+    BarComponent,
+    ContentCardsComponent,
+    DemographLineComponent,
+    LeadsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
