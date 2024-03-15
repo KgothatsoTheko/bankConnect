@@ -12,6 +12,7 @@ import { BarComponent } from './charts/bar/bar.component';
 import { ContentCardsComponent } from './content-cards/content-cards.component';
 import { NgChartsModule } from 'ng2-charts';
 import { DemographLineComponent } from './charts/demograph-line/demograph-line.component';
+import { LeadsComponent } from './components/leads/leads.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { DemographLineComponent } from './charts/demograph-line/demograph-line.c
     BarComponent,
     ContentCardsComponent,
     DemographLineComponent,
+    LeadsComponent,
   ],
   imports: [
     BrowserModule,
