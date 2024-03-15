@@ -7,9 +7,9 @@ import { Component } from '@angular/core';
 })
 export class ContentCardsComponent {
   cards: any = [
-    {label: 'Customers'},
-    {label: 'Leads'},
-    {label: 'Tasks'},
-    {label: 'Reports'},
-  ]
+    { label: 'Customers', img: '../../assets/images/customers.png' },
+    { label: 'Leads', img: '../../assets/images/Leads.png' },
+    { label: 'Tasks', img: '../../assets/images/tasks.png' },
+    { label: 'Reports', img: '../../assets/images/reports.png' }
+  ];
 }

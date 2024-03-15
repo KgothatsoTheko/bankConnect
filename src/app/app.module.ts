@@ -11,6 +11,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { BarComponent } from './charts/bar/bar.component';
 import { ContentCardsComponent } from './content-cards/content-cards.component';
 import { NgChartsModule } from 'ng2-charts';
+import { DemographLineComponent } from './charts/demograph-line/demograph-line.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { NgChartsModule } from 'ng2-charts';
     ToolbarComponent,
     DashboardComponent,
     BarComponent,
-    ContentCardsComponent
+    ContentCardsComponent,
+    DemographLineComponent,
   ],
   imports: [
     BrowserModule,

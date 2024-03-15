@@ -39,11 +39,6 @@
     height: 79%;
   }
 
-  img{
-    height: 100%;
-    width: 20%;
-  }
-
   .logo{
     height: 100%;
     width: 100%;
@@ -63,4 +58,9 @@
     border-bottom: 3px solid orange;
     color: orange;
     cursor: pointer;
+  }
+
+  //font
+  h4{
+    font-size: medium;
   }

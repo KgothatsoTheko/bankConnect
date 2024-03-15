@@ -1,5 +1,9 @@
 .main-container{
     height: 100vh;
+    overflow: hidden;
+}
+h3{
+    margin-bottom: 0;
 }
 
 //flex
@@ -31,7 +35,7 @@ body{
 
 //width
 .width-90{
-    width: 90%;
+    width: 80%;
 }
 
 //cards
@@ -42,7 +46,11 @@ body{
 
 //gap
 .gap-1{
-    gap: 10em;
+    gap: 1em;
+}
+
+.gap-05{
+    gap: .5em;
 }
 
 
@@ -50,4 +58,33 @@ body{
 .charts{
     margin-top: 2em;
     height: 100%;
+}
+
+//inner
+.inner{
+    height: 90%;
+}
+
+//animations
+.customer-lead{
+    animation-name: slideup;
+    animation-duration: 3s;
+    animation-iteration-count: 1;
+    animation-direction: alternate;
+    animation-play-state: running;
+    animation-timing-function: ease-in-out;
+}
+
+.demograph{
+    animation-name: slideup;
+    animation-duration: 4s;
+    animation-iteration-count: 1;
+    animation-direction: alternate;
+    animation-play-state: running;
+    animation-timing-function: ease-in-out;
+}
+
+
+@keyframes slideup{
+    from{transform: translateY(300%)}
 }
