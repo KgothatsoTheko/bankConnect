@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class ToolbarComponent {
   menuItems: any =[
-    'Home', 'Customers', 'Tasks', 'Leads', 'Reports'
+   'Customers', 'Tasks', 'Leads', 'Reports','Logout'
   ]
 
 }

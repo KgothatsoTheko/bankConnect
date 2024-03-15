@@ -1,6 +1,6 @@
-<div class="flex gap-1 container">
+<div class="flex gap-1 ">
     <mat-card class="content flex center-center" *ngFor="let card of cards, let i = index">
-        <img src="../../assets/images/leads.png" alt="">
+        <img [src]="card.img" alt="">
         <h3>
             {{card.label}}
             <div class="flex center-center">
