@@ -1,4 +1,4 @@
-
+<!-- 
 
 <div class="full-width full-height center-center">
     <div class="width-80 center-center">
@@ -22,6 +22,56 @@
                       </mat-form-field>
     
                 </div>
+    
+                  <div class="flex pointer space-between">
+                    <p>Forgot Password?</p> 
+                  </div>
+                  <button mat-raised-button class="btn justify-center">LOG IN</button>
+            </div>
+            <div class="right center-center">
+                <img src="../../../assets/logo.png" width="100%" height="100%">
+            </div>
+        </div> 
+    </div>  
+    </div> -->
+
+    
+
+<div class="full-width full-height center-center">
+    <div class="width-80 center-center">
+        <div class="content-div flex">
+            <div class="left center-center flex column">
+                <form [formGroup]="signInForm">
+    
+                    <div class="flex gap ">
+                        <img src="../../../assets/mdi--user.svg" width="30px">
+        
+                        <mat-form-field class="mat-input">
+                            <mat-label>Employee ID</mat-label>
+                            <input type="number" matInput required formControlName="employeeId">
+                           
+                            <mat-error *ngIf="signInForm.get('employeeId')?.hasError('required')">
+                                Employee ID is <strong>required</strong>
+                            </mat-error>
+                        
+                        </mat-form-field>
+                    </div>
+    
+                    <div class="flex gap align">
+                        <img src="../../../assets/material-symbols--lock.svg" width="30px">
+        
+                        <mat-form-field class="mat-input">
+                            <mat-label>Password</mat-label>
+                            <input type="password" matInput required formControlName="password">
+                            <mat-error *ngIf="signInForm.get('password')?.hasError('required')">
+                                Password is <strong>required</strong>
+                            </mat-error>
+                            <mat-error *ngIf="signInForm.get('password')?.hasError('minlength')">
+                                Password should at least have 4 charectors
+                            </mat-error>
+                          </mat-form-field>
+                    </div>
+                </form>
     
                   <div class="flex pointer space-between">
                     <p>Forgot Password?</p> 
