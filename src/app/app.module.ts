@@ -16,6 +16,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { DemographLineComponent } from './charts/demograph-line/demograph-line.component';
 import { LeadsComponent } from './components/leads/leads.component';
 import { ReportsComponent } from './components/reports/reports.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ReportsComponent } from './components/reports/reports.component';
     BrowserAnimationsModule,
     MaterialModule,
     ReactiveFormsModule,
-    NgChartsModule
+    NgChartsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
