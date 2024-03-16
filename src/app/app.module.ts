@@ -15,6 +15,13 @@ import { ContentCardsComponent } from './content-cards/content-cards.component';
 import { NgChartsModule } from 'ng2-charts';
 import { DemographLineComponent } from './charts/demograph-line/demograph-line.component';
 import { LeadsComponent } from './components/leads/leads.component';
+import { RegisterLeadComponent } from './forms/register-lead/register-lead.component';
+import { HomeComponent } from './home/home.component';
+import { CarouselComponent } from './components/carousel/carousel.component';
+import { TasksComponent } from './components/tasks/tasks.component';
+import { TasksBarComponent } from './charts/tasks-bar/tasks-bar.component';
+import { TasksDoughnutComponent } from './charts/tasks-doughnut/tasks-doughnut.component';
+import { AddTaskComponent } from './forms/add-task/add-task.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +34,13 @@ import { LeadsComponent } from './components/leads/leads.component';
     ContentCardsComponent,
     DemographLineComponent,
     LeadsComponent,
+    RegisterLeadComponent,
+    HomeComponent,
+    CarouselComponent,
+    TasksComponent,
+    TasksBarComponent,
+    TasksDoughnutComponent,
+    AddTaskComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +48,7 @@ import { LeadsComponent } from './components/leads/leads.component';
     BrowserAnimationsModule,
     MaterialModule,
     ReactiveFormsModule,
-    NgChartsModule
+    NgChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
