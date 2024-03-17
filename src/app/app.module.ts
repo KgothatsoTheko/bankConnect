@@ -37,6 +37,7 @@ import { ReportsComponent } from './components/reports/reports.component';
     MaterialModule,
     ReactiveFormsModule,
     NgChartsModule
+   
   ],
   providers: [],
   bootstrap: [AppComponent]
