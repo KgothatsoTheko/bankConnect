@@ -17,7 +17,10 @@ import { DemographLineComponent } from './charts/demograph-line/demograph-line.c
 import { LeadsComponent } from './components/leads/leads.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { HttpClientModule } from '@angular/common/http';
+import { PieComponent } from './charts/pie/pie.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +33,7 @@ import { HttpClientModule } from '@angular/common/http';
     DemographLineComponent,
     LeadsComponent,
     ReportsComponent,
+    PieComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +42,9 @@ import { HttpClientModule } from '@angular/common/http';
     MaterialModule,
     ReactiveFormsModule,
     NgChartsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule,
+    NgbCarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent]
