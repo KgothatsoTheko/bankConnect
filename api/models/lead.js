@@ -8,9 +8,9 @@ const Address = new mongoose.Schema({
 })
 
 const Lead = new mongoose.Schema({
-    id: { type: String, required: true },
+    ID: { type: String, required: true },
     DOB: { type: String, required: true },
-    age: { type: Number, required: true },
+    age: { type: String, required: true },
     citizenship: { type: String, required: true },
     gender: { type: String, required: true },
     name: { type: String, required: true },

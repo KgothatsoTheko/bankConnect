@@ -1,0 +1,94 @@
+<mat-card>
+    <div class="flex center-center">
+        <h2>Add Task</h2>
+    </div>
+    <form [formGroup]="addTaskForm">
+        <mat-form-field appearance="fill">
+            <mat-label>Task Name</mat-label>
+            <input type="text" matInput formControlName="taskName" required>
+            <mat-error *ngIf="addTaskForm.get('taskName')?.hasError('required')">
+                Task name is required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Owner</mat-label>
+            <input type="text" matInput formControlName="owner" required>
+            <mat-error *ngIf="addTaskForm.get('owner')?.hasError('required')">
+                owner is required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <input type="text" matInput formControlName="description" maxlength="15" required>
+            <mat-error *ngIf="addTaskForm.get('description')?.hasError('required')">
+                description is required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" (click)="picker.open()">
+            <mat-label>Choose a date</mat-label>
+            <input formControlName="date" matInput [matDatepicker]="picker" readonly>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="addTaskForm.get('date')?.hasError('required')">
+                date is required
+            </mat-error>
+        </mat-form-field>
+
+        <div class="flex gap-1em">
+
+            <mat-form-field appearance="fill">
+                <mat-label>Start time</mat-label>
+                <input matInput type="time" formControlName="startTime" required>
+                <mat-error *ngIf="addTaskForm.get('startTime')?.hasError('required')">
+                    Start Time is required
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>End time</mat-label>
+                <input type="time" matInput formControlName="endTime" required>
+                <mat-error *ngIf="addTaskForm.get('endTime')?.hasError('required')">
+                    End time is required
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Task Type</mat-label>
+            <mat-select formControlName="taskType">
+                <mat-option>
+                    Walk-in
+                </mat-option>
+                <mat-option>
+                    Call
+                </mat-option>
+                <mat-option>
+                    email
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="addTaskForm.get('taskType')?.hasError('required')">
+                Task type is required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>select status</mat-label>
+            <mat-select formControlName="status">
+                <mat-option value="pending">
+                    pending
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="addTaskForm.get('status')?.hasError('required')">
+                Task type is required
+            </mat-error>
+        </mat-form-field>
+
+        <div class="flex center-center gap-1em">
+            <div><button mat-raised-button class="btn-cancel" (click)="cancel()">Cancel</button></div>
+            <div><button mat-raised-button class="btn-submit" (click)=" submit()">Submit</button></div>
+        </div>
+    </form>
+</mat-card>

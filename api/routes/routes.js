@@ -13,7 +13,7 @@ const multer = require('multer');
     router.post('/leads', leadController.addLead);
     router.post('/upload', upload.any(), leadController.uploadFile);
     router.get('/get-lead', leadController.getLead)
-    router.post('/update-lead/:email', leadController.updateLead)
+    router.post('/update-lead/:leadName', leadController.updateLead)
     router.delete('/delete-lead/:email', leadController.deleteLead)
 
     // Add task routes

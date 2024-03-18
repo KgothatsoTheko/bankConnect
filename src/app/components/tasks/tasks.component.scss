@@ -1,0 +1,121 @@
+.main-container {
+    height: 100vh;
+}
+
+mat-card{
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+}
+table{
+    width: 80%;
+    overflow: hidden;
+}
+
+.toolbar-container {
+    height: 14%;
+}
+
+//image
+img {
+    height: 100%;
+    width: 20%;
+}
+
+.logo {
+    height: 100%;
+    width: 100%;
+}
+
+//content
+.content{
+height: 100vh;
+}
+
+//width
+.width-80{
+    width: 80%;
+}
+
+//spacebetween
+.spacebetween{
+    justify-content: space-between;
+    align-items: center;
+}
+
+//charts
+.tasks-bar{
+    width: 50%;
+}
+
+.tasks-doughnut{
+    width: 30%;
+}
+
+.charts{
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+//table
+.table{
+    margin-bottom: 2em;
+    height: 30%;
+}
+
+//buttons
+.addBtn{
+    background-color: orange !important;
+}
+
+//actions
+.Completed{
+    // background-color: lightgray;
+    color: white;
+}
+
+.Completed:hover{
+    background-color: orange !important;
+}
+
+.delete{
+    // background-color: lightgray;
+    color: white;
+}
+
+.delete:hover{
+    background-color: orange !important;
+}
+
+//h4
+h4{
+    margin: 0;
+    color: black;
+    width: 100%;
+    height: 100%;
+}
+
+//table
+.tables {
+    margin-top: 2em;
+    min-width: none !important;
+      width: 90%;
+      border: 3px solid orange;
+      border-radius: 7px;
+      margin-left: 4em;
+    }
+  
+    span {
+      width: 10%;
+    }
+    
+    .mat-mdc-form-field {
+      font-size: 14px;
+
+    }
+  
+   
+     tr th {
+      background-color:rgba(236, 234, 234, 0.643);
+    }
