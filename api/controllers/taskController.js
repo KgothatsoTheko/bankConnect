@@ -18,9 +18,9 @@ module.exports = {
     addTask: async (req, res) => {
         try {
             const payload = { ...req.body };
-            payload['fileId'] = pictureId;
-            const newTask = new Lead(payload)
+            const newTask = new Task(payload)
             const result = await newTask.save()
+            console.log(req)
             res.status(201).send(result)
         } catch (error) {
             res.status(500).send(error)
@@ -56,4 +56,5 @@ module.exports = {
             res.status(500).send(error);
         }
     },
+
 }

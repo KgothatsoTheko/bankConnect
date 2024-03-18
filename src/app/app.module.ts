@@ -21,6 +21,7 @@ import { PieComponent } from './charts/pie/pie.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { SliderComponent } from './sharedComponents/slider/slider.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +35,7 @@ import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
     LeadsComponent,
     ReportsComponent,
     PieComponent,
+    SliderComponent,
   ],
   imports: [
     BrowserModule,

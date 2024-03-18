@@ -8,7 +8,7 @@
 }
 .reports-update{
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     margin-top: 4em;
     gap: 4em;
 }
@@ -16,7 +16,8 @@
     text-align: center;
 }
 .update , .chart{
-    height: 400px;
+    height: 300px;
+    // width: 500px;
 }
 .full-weight{
     width: 100%;
@@ -27,6 +28,9 @@
 .height-250px{
  height: 250px;
 }
+.width-250px{
+    width: 350px;
+}
 .flex{
 display: flex;
 } 
@@ -34,3 +38,41 @@ display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
+.feedback{
+    .mat-mdc-card{
+        width: 200px;
+    }
+}
+h6{
+    margin-top: 2em;
+}
+.content {
+    position: relative;
+    padding: 0 1em;
+
+    .left,
+    .right {
+        position: absolute;
+        top: 100px;
+        z-index: 3;
+    }
+
+    .right {
+        right: 0;
+    }
+
+    .slider {
+        overflow-x: scroll;
+    }
+
+    // Added this to hide the scroll bar
+    .slider::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.m-b-2em{
+    margin-bottom: 2em;
+}
+   
