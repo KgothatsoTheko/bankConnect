@@ -14,7 +14,7 @@ export class ToolbarComponent {
    {label:'Tasks', route:'/dashboard/tasks'},
    {label:'Leads', route:'/dashboard/leads'},
    {label:'Reports', route:'/dashboard/reports'},
-   {label:'Logout', route:'/dashboard/logout'},
+   {label:'Logout', route:'/Login'},
 
   ]
 
@@ -23,7 +23,7 @@ export class ToolbarComponent {
     
     setTimeout(() => {
       this.isLoading = false;
-    }, 1000);
+    }, 2000);
   }
 
   landing() {
@@ -32,7 +32,12 @@ export class ToolbarComponent {
     setTimeout(() => {
       this.isLoading = false;
       this.router.navigate(['/dashboard/home'])
-    }, 1000);
+    }, 2000);
+  }
+
+  logout(){
+    sessionStorage.clear()
+   return  this.router.navigate(['login'])
   }
 
 }

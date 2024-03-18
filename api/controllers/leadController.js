@@ -81,14 +81,14 @@ module.exports = {
         }
     },
     //Updating data to mongo
-    updateLead: async (req, res) => {
-        const options = { upsert: true };
-        const filter = { ...req.params }
+    updateLead:  async (req, res) => {
         try {
-            const result = await Lead.updateOne(filter, req.body, options);
-            res.status(200).send(result)
+          const leadId = req.params.taskName;
+          const updatedLead = req.body.status; 
+          const updatedLeadForm = await Task.findByIdAndUpdate(leadId, { lead: updatedLead }, { new: true });
+           res.status(200).json(updatedLeadForm);
         } catch (error) {
-            res.status(500).send(error);
+           res.status(500).json({ message: 'Internal server error' });
         }
     },
     //Updating data to mongo

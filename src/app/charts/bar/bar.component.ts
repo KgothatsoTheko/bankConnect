@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ChartConfiguration } from 'chart.js';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-bar',
@@ -14,21 +15,40 @@ export class BarComponent {
   public barChartPlugins = [];
 
   public barChartData: ChartConfiguration<'bar'>['data'] = {
-    labels: [ '2006', '2007', '2008', '2009', '2010', '2011', '2012' ],
+    labels: ['Customers to Leads'],
     datasets: [
-      { data: [ 65, 59, 80, 81, 56, 55, 40 ],
-         label: 'Leads', backgroundColor: 'orange' },
-
-      { data: [ 28, 48, 40, 19, 86, 27, 90 ], 
-        label: 'Customers',backgroundColor: 'black' }
+      { data: [], label: 'Customers', backgroundColor: 'orange' },
+      { data: [], label: 'Leads', backgroundColor: 'black' }
     ]
   };
 
-  public barChartOptions: ChartConfiguration<'bar'>['options'] = {
-    responsive: false,
-  };
+  constructor(private api: ApiService) {}
 
-  constructor() {
+  ngOnInit() {
+    this.fetchData();
   }
 
+  fetchData() {
+    this.api.genericGet('/get-lead').subscribe({
+      next: (res: any) => {
+        console.log(res);
+        const tasks = res; 
+
+        const statusCount: { [key: string]: number } = {
+          'Customers': 0,
+          'Leads': 0
+        };
+
+        tasks.forEach((task: any) => {
+          const status = task.status.toLowerCase();
+          if (statusCount.hasOwnProperty(status)) {
+            statusCount[status]++;
+          }
+        });
+
+        this.barChartData.datasets[0].data.push(statusCount['Customers']);
+        this.barChartData.datasets[1].data.push(statusCount['Leads']);
+      }
+    });
+  }
 }

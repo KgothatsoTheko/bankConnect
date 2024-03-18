@@ -35,7 +35,7 @@ body {
 
 mat-toolbar {
   background-color: #ffffff;
-  border-bottom: 0.5px solid lightgray;
+  border-bottom: 3px solid orange;
   height: 79%;
 }
 
@@ -65,7 +65,7 @@ img {
 }
 
 .pages:hover {
-  border-bottom: 3px solid orange;
+  border-bottom: 6px solid orange;
   color: orange;
   cursor: pointer;
 }

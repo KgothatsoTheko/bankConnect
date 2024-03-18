@@ -12,7 +12,7 @@ body {
   border: 1px solid grey;
   border-radius: 7px;
   overflow: hidden;
-  box-shadow: 2px 3px;
+  box-shadow: 2px 3px ;
   animation-name: slideLeft;
   animation-duration: 2s;
   animation-iteration-count: 1;
@@ -22,7 +22,6 @@ body {
 }
 
 .content:hover {
-  cursor: pointer;
   border: 1px solid orange;
   color: orange;
 }
@@ -48,6 +47,11 @@ body {
 
 .text-align {
   text-align: center;
+}
+
+//card
+mat-card{
+  background-color: rgba(236, 234, 234, 0.643);
 }
 
 //gap

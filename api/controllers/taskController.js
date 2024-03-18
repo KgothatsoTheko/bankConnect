@@ -18,8 +18,7 @@ module.exports = {
     addTask: async (req, res) => {
         try {
             const payload = { ...req.body };
-            payload['fileId'] = pictureId;
-            const newTask = new Lead(payload)
+            const newTask = new Task(payload)
             const result = await newTask.save()
             res.status(201).send(result)
         } catch (error) {
@@ -35,16 +34,15 @@ module.exports = {
             res.status(500).send(error);
         }
     },
-    //Updating data to mongo
-    updateTask: async (req, res) => {
-        const options = { upsert: true };
-        const filter = { ...req.params }
-        try {
-            const result = await Task.updateOne(filter, req.body, options);
-            res.status(200).send(result)
-        } catch (error) {
-            res.status(500).send(error);
-        }
+    updateTask : async (req, res) => {
+      try {
+        const taskId = req.params.taskName;
+        const updatedStatus = req.body.status; 
+        const updatedTask = await Task.findByIdAndUpdate(taskId, { status: updatedStatus }, { new: true });
+         res.status(200).json(updatedTask);
+      } catch (error) {
+         res.status(500).json({ message: 'Internal server error' });
+      }
     },
     //Updating data to mongo
     deleteTask: async (req, res) => {

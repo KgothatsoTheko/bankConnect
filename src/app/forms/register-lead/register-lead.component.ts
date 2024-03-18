@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-register-lead',
@@ -17,10 +19,12 @@ DOB!:string;
   gender:any;
   age:any;
   citizen:any;
+  isUpdate: boolean = false;
 
 registerForm: FormGroup
 
-constructor(private matDialogRef: MatDialogRef<RegisterLeadComponent>, private fb:FormBuilder){
+constructor(@Inject(MAT_DIALOG_DATA) public data:any,private matDialogRef: MatDialogRef<RegisterLeadComponent>,
+   private fb:FormBuilder, private snackbar:MatSnackBar, private api:ApiService){
   this.registerForm = new FormGroup({
     name: new FormControl('',[Validators.required]),
     surname: new FormControl('',[Validators.required]),
@@ -34,12 +38,21 @@ constructor(private matDialogRef: MatDialogRef<RegisterLeadComponent>, private f
     contact: new FormControl('')
   })
 this.Date = new Date().getFullYear()
+
+if (data) {
+  this.isUpdate = true;
+  this.isEdit = true;
+  this.registerForm.patchValue(data)
 }
+
+}
+isEdit: boolean = false;
 
 IdValid() {
    this.DOB = this.registerForm.controls['ID'].value.toString(); 
   console.log(this.DOB);
   this.year = "19" + this.DOB.slice(0, 2);
+  console.log(this.year)
   this.month = this.DOB.slice(2, 4);
   this.day = this.DOB.slice(4, 6);
  
@@ -57,6 +70,22 @@ IdValid() {
 
 submit(){
   console.log(this.registerForm.value)
+  let formValue = this.registerForm.value;
+
+  if (this.registerForm.invalid) {
+    this.snackbar.open("fill in fields", "OK", { duration: 3000 })
+    return
+  }
+
+  this.api.genericPost('/leads', formValue).subscribe({
+    next: (res: any) => {
+      console.log(res);
+    },
+    error: (err: any) => console.log("error", err),
+    complete: () => { }
+  });
+  this.snackbar.open('Submitted successfully', "OK", { duration: 3000 });
+  this.matDialogRef.close()
 }
 
 cancel(){

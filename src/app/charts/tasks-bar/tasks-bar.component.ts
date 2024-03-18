@@ -1,35 +1,50 @@
-import { Component } from '@angular/core';
-import { ChartConfiguration, Colors } from 'chart.js';
+import { Component, OnInit } from '@angular/core';
+import { ChartConfiguration } from 'chart.js';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-tasks-bar',
   templateUrl: './tasks-bar.component.html',
   styleUrls: ['./tasks-bar.component.scss']
 })
-export class TasksBarComponent {
-  title = 'ng2-charts-demo';
-
+export class TasksBarComponent implements OnInit {
   public barChartLegend = true;
   public barChartPlugins = [];
-
   public barChartData: ChartConfiguration<'bar'>['data'] = {
-    labels: [ '2006', '2007', '2008', '2009', '2010', '2011', '2012' ],
+    labels: ['status bars'],
     datasets: [
-      { data: [ 65, 59, 80, 81, 56, 55, 40 ],
-         label: 'completed', backgroundColor: 'orange' },
-         
-
-      { data: [ 28, 48, 40, 19, 86, 27, 90 ], 
-        label: 'pending',backgroundColor: 'black' },
-
+      { data: [], label: 'Completed', backgroundColor: 'orange' },
+      { data: [], label: 'Pending', backgroundColor: 'black' }
     ]
   };
 
-  public barChartOptions: ChartConfiguration<'bar'>['options'] = {
-    responsive: false,
-  };
+  constructor(private api: ApiService) {}
 
-  constructor() {
+  ngOnInit() {
+    this.fetchData();
   }
 
+  fetchData() {
+    this.api.genericGet('/get-task').subscribe({
+      next: (res: any) => {
+        console.log(res);
+        const tasks = res; 
+
+        const statusCount: { [key: string]: number } = {
+          'completed': 0,
+          'pending': 0
+        };
+
+        tasks.forEach((task: any) => {
+          const status = task.status.toLowerCase();
+          if (statusCount.hasOwnProperty(status)) {
+            statusCount[status]++;
+          }
+        });
+
+        this.barChartData.datasets[0].data.push(statusCount['completed']);
+        this.barChartData.datasets[1].data.push(statusCount['pending']);
+      }
+    });
+  }
 }
