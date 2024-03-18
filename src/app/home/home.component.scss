@@ -1,8 +1,6 @@
 .main-container{
-    padding: 10px;
-    box-sizing: border-box;
     height: 100vh;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 h3{
     margin-bottom: 0;
@@ -60,7 +58,8 @@ body{
 //charts
 .charts{
     margin-top: 2em;
-    height: 100%;
+    height: 72%;
+    overflow: hidden;
 }
 
 //inner
@@ -69,7 +68,6 @@ body{
 }
 
 //animations
-
 .customer-lead{
     animation-name: slideup;
     animation-duration: 3s;
