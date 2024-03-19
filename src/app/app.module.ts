@@ -27,7 +27,7 @@ import { SheetsComponent } from './sheets/sheets.component';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { QRCodeModule } from 'angularx-qrcode';
 import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
-import { CalendarModule, DateAdapter } from 'angular-calendar'; // Import CalendarModule here
+
 import { EmployeesComponent } from './components/employees/employees.component';
 import { QrCodeComponent } from './components/qr-code/qr-code.component';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
@@ -76,10 +76,6 @@ import { SliderComponent } from './sharedComponents/slider/slider.component';
     MatBottomSheetModule,
     QRCodeModule,
     NgxScannerQrcodeModule,
-    CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory,
-    }), // Pass adapterFactory to forRoot() method
   ],
   providers: [],
   bootstrap: [AppComponent]
