@@ -20,6 +20,7 @@ module.exports = {
             const payload = { ...req.body };
             const newTask = new Task(payload)
             const result = await newTask.save()
+            console.log(req)
             res.status(201).send(result)
         } catch (error) {
             res.status(500).send(error)
@@ -54,4 +55,5 @@ module.exports = {
             res.status(500).send(error);
         }
     },
+
 }

@@ -32,7 +32,11 @@ import { EmployeesComponent } from './components/employees/employees.component';
 import { QrCodeComponent } from './components/qr-code/qr-code.component';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
+import { PieComponent } from './charts/pie/pie.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { SliderComponent } from './sharedComponents/slider/slider.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,6 +60,8 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     QrCodeComponent,
     EmployeesComponent,
     // NgxQRCodeModule
+    PieComponent,
+    SliderComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,6 +71,8 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     ReactiveFormsModule,
     NgChartsModule,
     HttpClientModule,
+    NgbModule,
+    NgbCarouselModule,
     MatBottomSheetModule,
     QRCodeModule,
     NgxScannerQrcodeModule,
