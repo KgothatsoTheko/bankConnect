@@ -23,7 +23,6 @@ export class TasksDoughnutComponent {
   constructor(private api: ApiService) {
     this.api.genericGet('/get-task').subscribe({
       next: (res: any) => {
-        console.log(res);
         const tasks = res; 
 
         const statusCount: { [key: string]: number } = {

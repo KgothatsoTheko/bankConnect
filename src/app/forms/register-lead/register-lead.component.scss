@@ -1,7 +1,11 @@
 mat-card{
     padding: 10px;
     width: 100%;
-    background-color: rgba(245, 245, 245, 0.706);
+    background-color:white
+}
+
+h2{
+    color: Black;
 }
 
 mat-form-field{
@@ -10,11 +14,11 @@ mat-form-field{
 
 //buttons
 .btn-cancel {
-    background-color: red !important;
+    background-color: black !important;
     color: white;
 }
 
 .btn-submit{
-    background-color: blue !important;
+    background-color: #f9a71b !important;
     color: white;
 }

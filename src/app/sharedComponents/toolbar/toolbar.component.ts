@@ -10,6 +10,8 @@ export class ToolbarComponent {
   isLoading: boolean = false;
   constructor(private router:Router){}
   menuItems: any =[
+    
+   {label:'profile', route:'/dashboard/profile'},
    {label:'Customers', route:'dashboard/customers'},
    {label:'Tasks', route:'/dashboard/tasks'},
    {label:'Leads', route:'/dashboard/leads'},
@@ -37,7 +39,7 @@ export class ToolbarComponent {
 
   logout(){
     sessionStorage.clear()
-   return  this.router.navigate(['login'])
+   return  this.router.navigate(['Login'])
   }
 
 }
