@@ -27,7 +27,6 @@ export class TasksBarComponent implements OnInit {
   fetchData() {
     this.api.genericGet('/get-task').subscribe({
       next: (res: any) => {
-        console.log(res);
         const tasks = res; 
 
         const statusCount: { [key: string]: number } = {

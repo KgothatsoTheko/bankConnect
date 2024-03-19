@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,6 +23,15 @@ import { TasksDoughnutComponent } from './charts/tasks-doughnut/tasks-doughnut.c
 import { AddTaskComponent } from './forms/add-task/add-task.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SheetsComponent } from './sheets/sheets.component';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { QRCodeModule } from 'angularx-qrcode';
+import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
+import { CalendarModule, DateAdapter } from 'angular-calendar'; // Import CalendarModule here
+import { EmployeesComponent } from './components/employees/employees.component';
+import { QrCodeComponent } from './components/qr-code/qr-code.component';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
 
 @NgModule({
   declarations: [
@@ -44,6 +52,10 @@ import { HttpClientModule } from '@angular/common/http';
     TasksDoughnutComponent,
     AddTaskComponent,
     ReportsComponent,
+    SheetsComponent,
+    QrCodeComponent,
+    EmployeesComponent,
+    // NgxQRCodeModule
   ],
   imports: [
     BrowserModule,
@@ -52,7 +64,14 @@ import { HttpClientModule } from '@angular/common/http';
     MaterialModule,
     ReactiveFormsModule,
     NgChartsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatBottomSheetModule,
+    QRCodeModule,
+    NgxScannerQrcodeModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }), // Pass adapterFactory to forRoot() method
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -6,6 +6,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/services/api.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
+import { SheetsComponent } from 'src/app/sheets/sheets.component';
 
 @Component({
   selector: 'app-tasks',
@@ -15,13 +17,23 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class TasksComponent  {
   displayedColumns: string[] = ['taskName', 'Owner', 'date', 'start_time', 'end_time', 'status', 'task_type'];
 
+  statuses: string[] = ['completed', 'pending']
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   
   dataSource!: MatTableDataSource<any>;
 
-  constructor(private matdialog: MatDialog, private api: ApiService, private snackbar:MatSnackBar) { 
+  constructor(private matdialog: MatDialog, private api: ApiService, private snackbar:MatSnackBar,
+    private _bottomSheet: MatBottomSheet,) { 
     this.getTasks();
+  }
+
+  selectDisabled: boolean = false;
+
+  
+
+  openBottomSheet(): void {
+    this._bottomSheet.open(SheetsComponent);
   }
 
   getTasks() {
@@ -61,7 +73,6 @@ export class TasksComponent  {
     this.api.genericPost('/update-task/' + taskId, { status: updatedStatus }).subscribe({
       next: (res: any) => {
         console.log('Update successful:', res);
-        // Refresh the tasks list after update if needed
         this.getTasks();
       },
       error: (error: any) => {

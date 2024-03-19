@@ -19,7 +19,6 @@ export class ContentCardsComponent {
     this.api.genericGet('/get-lead').subscribe({
       next: (res: any) => {
         this.leadsCount = res.length;
-        console.log(this.leadsCount);
         this.updateCards();
       },
       error: (error: any) => {
@@ -40,7 +39,6 @@ export class ContentCardsComponent {
     this.api.genericGet('/get-task').subscribe({
       next: (res: any) => {
         this.tasksCount = res.length;
-        console.log('tasks ',this.tasksCount);
         this.updateTasks(); 
       },
       error: (error: any) => {

@@ -1,0 +1,47 @@
+//containers
+.main-container{
+    height: 83vh;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.mini-container{
+width: 47%;
+height: 47%;
+// background-color: aqua;
+}
+
+
+//image
+.profile-pic{
+    background-color: white;
+    height: 100%;
+    width: 30%;
+    border-radius: 50%;
+    border: 2px solid black;
+}
+
+//chart
+.pie{
+    width: 50%;
+}
+
+//qrcode
+.qrCode{
+    margin-top: 2em;
+}
+
+//date and events
+
+.date, .events{
+    border: 2px solid orange;
+    box-shadow: 2px 1px orange;
+    border-radius: 7px;
+}
+
+.info{
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
