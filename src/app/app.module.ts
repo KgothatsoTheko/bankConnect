@@ -24,7 +24,11 @@ import { TasksDoughnutComponent } from './charts/tasks-doughnut/tasks-doughnut.c
 import { AddTaskComponent } from './forms/add-task/add-task.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { HttpClientModule } from '@angular/common/http';
+import { PieComponent } from './charts/pie/pie.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { SliderComponent } from './sharedComponents/slider/slider.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +48,8 @@ import { HttpClientModule } from '@angular/common/http';
     TasksDoughnutComponent,
     AddTaskComponent,
     ReportsComponent,
+    PieComponent,
+    SliderComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +58,9 @@ import { HttpClientModule } from '@angular/common/http';
     MaterialModule,
     ReactiveFormsModule,
     NgChartsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule,
+    NgbCarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent]

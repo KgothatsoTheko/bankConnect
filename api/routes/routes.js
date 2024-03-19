@@ -20,9 +20,14 @@ const multer = require('multer');
     const taskController = require('../controllers/taskController');
     router.get('/', taskController.defaultRoute);
     router.post('/tasks', taskController.addTask);
-    router.get('/get-task', taskController.getTask)
-    router.post('/update-task/:taskName', taskController.updateTask)
-    router.delete('/delete-task/:taskName', taskController.deleteTask)
+    router.get('/get-task', taskController.getTask);
+    router.post('/update-task/:taskName', taskController.updateTask);
+    router.delete('/delete-task/:taskName', taskController.deleteTask);
 
+    // Add Report routes
+    const reportController = require('../controllers/reportController');
+    router.get('/', reportController.defaultRoute);
+    router.post('/reports', reportController.addReport);
+    router.get('/get-report', reportController.getReport);
 
 module.exports = router;
