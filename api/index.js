@@ -17,6 +17,10 @@ mongoose.connect('mongodb://127.0.0.1:27017/bankConnect')
 app.use(express.json())
 app.use(cors(corsOptions))
 
+// ENV
+const dotenv = require('dotenv')
+dotenv.config()
+
 // Routes
 const routes = require('./routes/routes');
 app.use(routes);

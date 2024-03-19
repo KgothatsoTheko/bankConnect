@@ -9,7 +9,7 @@ const Address = new mongoose.Schema({
 
 const Lead = new mongoose.Schema({
     id: { type: String, required: true },
-    DOB: { type: String, required: true },
+    DOB: { type: Date, required: true },
     age: { type: Number, required: true },
     citizenship: { type: String, required: true },
     gender: { type: String, required: true },
