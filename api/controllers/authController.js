@@ -4,6 +4,8 @@ const Role = require('../models/role.js')
 const bcrypt = require('bcrypt')
 // create json web token
 const jwt = require('jsonwebtoken')
+// Sending email
+const sendMail = require('../sendMail.js');
 
 module.exports = {
     registerRoute: async (req, res, next) => {
@@ -14,6 +16,20 @@ module.exports = {
             payload.pin = hashPin
             const newCustomer = new Customer(payload)
             const result = await newCustomer.save()
+
+             // Send email to the created email address
+             const mailOptions = {
+                from: {
+                    name: "Kgothatso Theko",
+                    address: "kgothatsotheko7@gmail.com"
+                },
+                to: req.body.email.toString(),
+                subject: "New Account Created",
+                text: "Account successfully created",
+                html: "<b>Account successfully created</b>",
+            };
+            sendMail(mailOptions);
+
             res.status(201).send(result)
         } catch (error) {
             res.status(500).send(error)
