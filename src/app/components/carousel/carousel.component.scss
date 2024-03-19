@@ -1,0 +1,22 @@
+.carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+  
+  .carousel-inner {
+    display: flex;
+  }
+  
+  .carousel-item {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    margin-right: 10px; /* Adjust as needed */
+  }
+  

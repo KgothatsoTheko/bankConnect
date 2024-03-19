@@ -13,16 +13,16 @@ const multer = require('multer');
     router.post('/leads', leadController.addLead);
     router.post('/upload', upload.any(), leadController.uploadFile);
     router.get('/get-lead', leadController.getLead)
-    router.post('/update-lead/:email', leadController.updateLead)
+    router.post('/update-lead/:leadName', leadController.updateLead)
     router.delete('/delete-lead/:email', leadController.deleteLead)
 
     // Add task routes
     const taskController = require('../controllers/taskController');
     router.get('/', taskController.defaultRoute);
     router.post('/tasks', taskController.addTask);
-    router.get('/get-task', taskController.getTask)
-    router.post('/update-task/:taskName', taskController.updateTask)
-    router.delete('/delete-task/:taskName', taskController.deleteTask)
+    router.get('/get-task', taskController.getTask);
+    router.post('/update-task/:taskName', taskController.updateTask);
+    router.delete('/delete-task/:taskName', taskController.deleteTask);
 
     // Customer routes
     const customerController = require('../controllers/customerController');
@@ -51,5 +51,10 @@ const multer = require('multer');
     // delete role from db
     router.delete('/delete/:id', roleController.deleteRole )
     
+    // Add Report routes
+    const reportController = require('../controllers/reportController');
+    router.get('/', reportController.defaultRoute);
+    router.post('/reports', reportController.addReport);
+    router.get('/get-report', reportController.getReport);
 
 module.exports = router;

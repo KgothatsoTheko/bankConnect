@@ -15,9 +15,20 @@ import { ContentCardsComponent } from './content-cards/content-cards.component';
 import { NgChartsModule } from 'ng2-charts';
 import { DemographLineComponent } from './charts/demograph-line/demograph-line.component';
 import { LeadsComponent } from './components/leads/leads.component';
+import { RegisterLeadComponent } from './forms/register-lead/register-lead.component';
+import { HomeComponent } from './home/home.component';
+import { CarouselComponent } from './components/carousel/carousel.component';
+import { TasksComponent } from './components/tasks/tasks.component';
+import { TasksBarComponent } from './charts/tasks-bar/tasks-bar.component';
+import { TasksDoughnutComponent } from './charts/tasks-doughnut/tasks-doughnut.component';
+import { AddTaskComponent } from './forms/add-task/add-task.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { HttpClientModule } from '@angular/common/http';
+import { PieComponent } from './charts/pie/pie.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { SliderComponent } from './sharedComponents/slider/slider.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +40,16 @@ import { HttpClientModule } from '@angular/common/http';
     ContentCardsComponent,
     DemographLineComponent,
     LeadsComponent,
+    RegisterLeadComponent,
+    HomeComponent,
+    CarouselComponent,
+    TasksComponent,
+    TasksBarComponent,
+    TasksDoughnutComponent,
+    AddTaskComponent,
     ReportsComponent,
+    PieComponent,
+    SliderComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +58,9 @@ import { HttpClientModule } from '@angular/common/http';
     MaterialModule,
     ReactiveFormsModule,
     NgChartsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule,
+    NgbCarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent]
