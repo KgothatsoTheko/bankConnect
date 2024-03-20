@@ -6,7 +6,7 @@
     <button mat-raised-button (click)="exportexcel()">Export to Excel</button>
   </div>
     <div class="reports-table">
-      <table mat-table  class="mat-elevation-z8" id="report-table">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" id="report-table">
 
         <!-- Customer Column -->
         <ng-container matColumnDef="Customer">

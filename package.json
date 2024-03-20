@@ -30,7 +30,7 @@
     "date-fns": "^3.6.0",
     "dotenv": "^16.4.5",
     "ng2-charts": "^4.1.1",
-    "ngx-scanner-qrcode": "1.6.6",
+    "ngx-scanner-qrcode": "^1.6.6",
     "nodemailer": "^6.9.12",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

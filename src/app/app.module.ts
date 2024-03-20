@@ -30,7 +30,6 @@ import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
 
 import { EmployeesComponent } from './components/employees/employees.component';
 import { QrCodeComponent } from './components/qr-code/qr-code.component';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 import { PieComponent } from './charts/pie/pie.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
