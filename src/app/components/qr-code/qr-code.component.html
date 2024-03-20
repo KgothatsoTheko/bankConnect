@@ -5,12 +5,12 @@
 
     <div>
         <h2>Your QR code is <span>Ready!</span> </h2>
-      <h3>
+      <h5 *ngIf="istext">Take a photo of the QR code to scan and login <br><br>
         Click <a [href]="qrCodeDownloadLink" download="qrcode"> <span>here</span> </a>
-            to <b>Download</b> it and use it next time you login.
-      </h3> 
+            to <b>Download</b> the QR code and use it next time you login. <br><br>
+            Check your profile if you need it again.
+      </h5> 
     </div>
-
 </div>
 
 <div *ngIf="login">
@@ -28,4 +28,4 @@
 
 </div>
 
-<button mat-raised-button color="primary" (click)="login = !login">Login</button>
+<button mat-raised-button color="primary" class="login" (click)="login = !login">Login</button>
