@@ -29,7 +29,7 @@
 
         <mat-form-field appearance="fill" (click)="picker.open()">
             <mat-label>Choose a date</mat-label>
-            <input formControlName="date" matInput [matDatepicker]="picker" readonly>
+            <input formControlName="date" [min]="minDate" matInput [matDatepicker]="picker" readonly>
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
             <mat-error *ngIf="addTaskForm.get('date')?.hasError('required')">
@@ -38,34 +38,39 @@
         </mat-form-field>
 
         <div class="flex gap-1em">
-
             <mat-form-field appearance="fill">
                 <mat-label>Start time</mat-label>
-                <input matInput type="time" formControlName="startTime" required>
+                <input matInput type="time"  [min]="defaultStartTime" formControlName="startTime" required>
                 <mat-error *ngIf="addTaskForm.get('startTime')?.hasError('required')">
-                    Start Time is required
+                  Start Time is required
                 </mat-error>
-            </mat-form-field>
-
-            <mat-form-field appearance="fill">
+                <mat-error *ngIf="addTaskForm.get('startTime')?.hasError('invalidTime')">
+                  Start Time should be earlier than End Time
+                </mat-error>
+              </mat-form-field>
+              
+              <mat-form-field appearance="fill">
                 <mat-label>End time</mat-label>
-                <input type="time" matInput formControlName="endTime" required>
+                <input type="time" matInput formControlName="endTime" [max]="defaultEndTime" required>
                 <mat-error *ngIf="addTaskForm.get('endTime')?.hasError('required')">
-                    End time is required
+                  End time is required
                 </mat-error>
-            </mat-form-field>
+                <mat-error *ngIf="addTaskForm.get('endTime')?.hasError('invalidTime')">
+                  End Time should be later than Start Time
+                </mat-error>
+              </mat-form-field>
         </div>
 
         <mat-form-field appearance="fill">
             <mat-label>Task Type</mat-label>
             <mat-select formControlName="taskType">
-                <mat-option>
+                <mat-option value="Walk-in">
                     Walk-in
                 </mat-option>
-                <mat-option>
+                <mat-option value="Call">
                     Call
                 </mat-option>
-                <mat-option>
+                <mat-option value="email">
                     email
                 </mat-option>
             </mat-select>

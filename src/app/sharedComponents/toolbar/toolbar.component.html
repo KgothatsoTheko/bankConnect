@@ -5,8 +5,8 @@
     </div>
 
     <div class="pages-container flex gap-05">
-        <div class="pages flex center-center gap-05" *ngFor="let item of menuItems" (click)="item.label === 'Logout' ? logout() : animation()">
-            <h4 [routerLink]="item.route" >{{item.label}}</h4>
+        <div class="pages flex center-center gap-05" *ngFor="let item of menuItems">
+            <h4 [routerLink]="item.route" (click)="item.label === 'Logout' ? logout() : animation()">{{item.label}}</h4>
            </div>
     </div>
  </mat-toolbar>

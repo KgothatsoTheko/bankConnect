@@ -1,0 +1,31 @@
+<div *ngIf="!login" class="flex">
+    <div>
+        <qrcode (qrCodeURL)="onChangeURL($event)" [qrdata]="myAngularxQrCode" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+    </div>
+
+    <div>
+        <h2>Your QR code is <span>Ready!</span> </h2>
+      <h3>
+        Click <a [href]="qrCodeDownloadLink" download="qrcode"> <span>here</span> </a>
+            to <b>Download</b> it and use it next time you login.
+      </h3> 
+    </div>
+
+</div>
+
+<div *ngIf="login">
+    <!-- For camera -->
+    <ngx-scanner-qrcode #action="scanner"></ngx-scanner-qrcode>
+
+    <!-- Loading -->
+    <p *ngIf="action.isLoading">⌛ Loading...</p>
+
+    <!-- start -->
+    <button mat-raised-button class="" (click)="action.isStart ? action.stop() : action.start()">{{action.isStart ? 'Stop' : 'Start'}}</button>
+
+    <button mat-raised-button color="primary" (click)="viewData(action)">Done</button>
+ 
+
+</div>
+
+<button mat-raised-button color="primary" (click)="login = !login">Login</button>

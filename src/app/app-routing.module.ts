@@ -5,7 +5,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { LeadsComponent } from './components/leads/leads.component';
 import { TasksComponent } from './components/tasks/tasks.component';
-import { ReportsComponent } from './components/reports/reports.component';
+import { QrCodeComponent } from './components/qr-code/qr-code.component';
+import { EmployeesComponent } from './components/employees/employees.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/Login', pathMatch: 'full' },
@@ -15,7 +16,9 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'leads', component: LeadsComponent },
       { path: 'tasks', component: TasksComponent },
-      { path: 'reports' ,component:ReportsComponent}
+      { path: 'qrCode', component: QrCodeComponent },
+      {path: 'profile', component: EmployeesComponent}
+
     ]
   }
 

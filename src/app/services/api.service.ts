@@ -10,6 +10,7 @@ export class ApiService {
   constructor(private http: HttpClient) {
   }
 
+  
   genericPost(endpoint: any, body: any) {
     return this.http.post(this.serverUrl + endpoint, body)
   }
@@ -24,5 +25,9 @@ export class ApiService {
 
   genericUpdate(endpoint: any, body: any){
     return this.http.post(this.serverUrl + endpoint, body)
+  }
+
+  isLoggedIn() {
+    return sessionStorage.getItem('currentUser')
   }
 }

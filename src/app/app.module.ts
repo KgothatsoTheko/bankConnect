@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,6 +23,15 @@ import { TasksDoughnutComponent } from './charts/tasks-doughnut/tasks-doughnut.c
 import { AddTaskComponent } from './forms/add-task/add-task.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SheetsComponent } from './sheets/sheets.component';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { QRCodeModule } from 'angularx-qrcode';
+import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
+
+import { EmployeesComponent } from './components/employees/employees.component';
+import { QrCodeComponent } from './components/qr-code/qr-code.component';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
 import { PieComponent } from './charts/pie/pie.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -48,6 +56,10 @@ import { SliderComponent } from './sharedComponents/slider/slider.component';
     TasksDoughnutComponent,
     AddTaskComponent,
     ReportsComponent,
+    SheetsComponent,
+    QrCodeComponent,
+    EmployeesComponent,
+    // NgxQRCodeModule
     PieComponent,
     SliderComponent,
   ],
@@ -60,7 +72,10 @@ import { SliderComponent } from './sharedComponents/slider/slider.component';
     NgChartsModule,
     HttpClientModule,
     NgbModule,
-    NgbCarouselModule
+    NgbCarouselModule,
+    MatBottomSheetModule,
+    QRCodeModule,
+    NgxScannerQrcodeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
