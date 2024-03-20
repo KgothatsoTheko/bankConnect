@@ -11,10 +11,7 @@
           <button class="addBtn" mat-raised-button (click)="register()"> Add new lead </button>
         </div>
       </div>
-      <div class="chart m-t-3em">
-        <app-demograph-line></app-demograph-line>
-      </div>
-    <!--  <mat-form-field>
+     <mat-form-field>
         <mat-label>Filter</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
       </mat-form-field>
@@ -93,7 +90,7 @@
           </tr>
         </table>
         <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-      </div> -->
+      </div>
       <div class="inner-content" #content>
       <div class="leads-slider m-t-3em">
         <mat-card *ngFor="let i of leads">
