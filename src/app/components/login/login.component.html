@@ -47,11 +47,11 @@
                         <img src="../../../assets/mdi--user.svg" width="30px">
         
                         <mat-form-field class="mat-input">
-                            <mat-label>Employee ID</mat-label>
-                            <input type="number" matInput required formControlName="employeeId">
+                            <mat-label>Email</mat-label>
+                            <input type="text" matInput required formControlName="email">
                            
-                            <mat-error *ngIf="signInForm.get('employeeId')?.hasError('required')">
-                                Employee ID is <strong>required</strong>
+                            <mat-error *ngIf="signInForm.get('email')?.hasError('required')">
+                                Email ID is <strong>required</strong>
                             </mat-error>
                         
                         </mat-form-field>
@@ -76,7 +76,7 @@
                   <div class="flex pointer space-between">
                     <p>Forgot Password?</p> 
                   </div>
-                  <button mat-raised-button class="btn justify-center">LOG IN</button>
+                  <button mat-raised-button class="btn justify-center" (click)=" submit()">LOG IN</button>
             </div>
             <div class="right center-center">
                 <img src="../../../assets/logo.png" width="100%" height="100%">

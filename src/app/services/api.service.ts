@@ -27,7 +27,8 @@ export class ApiService {
     return this.http.post(this.serverUrl + endpoint, body)
   }
 
-  isLoggedIn() {
-    return sessionStorage.getItem('currentUser')
+  get(key: string, sessionType: string): any {
+    let data = sessionType === 'session' ? sessionStorage.getItem(key) : localStorage.getItem(key);
+    return data ? JSON.parse(data) : data;
   }
 }

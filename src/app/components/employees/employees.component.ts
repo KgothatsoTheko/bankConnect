@@ -13,6 +13,7 @@ export class EmployeesComponent implements OnInit{
 
   constructor(private session:ApiService){
     this.minDate = new Date();
+    this.user = this.session.get('qr-user', 'session')
   }
 
   user:any
