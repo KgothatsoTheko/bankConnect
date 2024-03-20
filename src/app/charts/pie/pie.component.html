@@ -1,8 +1,9 @@
-
-    <mat-card>
-        <div>
-            <canvas baseChart [type]="'pie'" [data]="pieChartData" [options]="pieChartOptions"
-                [legend]="pieChartLegend">
-            </canvas>
-        </div>
-    </mat-card>
+<mat-card class=" flex center-center"> 
+    <canvas baseChart
+        [labels]="doughnutChartLabels"
+        [datasets]="doughnutChartDatasets"
+        [options]="doughnutChartOptions"
+        [legend]="true"
+        [type]="'doughnut'">
+</canvas>
+</mat-card>

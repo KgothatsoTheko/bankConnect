@@ -2,8 +2,6 @@ import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnInit,
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiService } from 'src/app/services/api.service';
 import * as XLSX from 'xlsx';
- 
-
 
 @Component({
   selector: 'app-reports',
@@ -12,30 +10,32 @@ import * as XLSX from 'xlsx';
 })
 
 export class ReportsComponent implements AfterViewInit {
-  dataSource:any;
-  currentDate:Date = new Date();
-  fileName= 'ReportSheet.xlsx';
-  report:any;
+  dataSource: any;
+  currentDate: Date = new Date();
+  fileName = 'ReportSheet.xlsx';
+  reports: any;
+  leads: any;
+  tasks: any;
   displayedColumns: string[] = ['Customer', 'Contact', 'Interactions Type', 'Date & Time', 'Employee', 'Outcome'];
   isLeftDisabled: boolean = true;
   isRightDisabled: boolean = false;
-  
-  @Input() data!:any[]; 
-  @Input() cardType!: string;
+  customerName: any;
 
   @ViewChild('content') content!: ElementRef;
+  leadsCount: any = 0;
+  rejectCount: any = 0;
+  approvedCount: any = 0;
 
-  constructor(private api: ApiService, private snackBar: MatSnackBar,private cd: ChangeDetectorRef) { 
-    this.api.genericGet('/get-report')
-      .subscribe({
-        next: (res: any) => {
-          this.report = res
-          console.log(res)
-          this.dataSource = this.report;
-        },
-        error: (err: any) => this.snackBar.open(err.error, 'Ok', { duration: 3000 }),
-        complete: () => { }
-      }) 
+  allUsers: any[] = [];
+  newUsers: any[] = []
+  constructor(private api: ApiService, private snackBar: MatSnackBar, private cd: ChangeDetectorRef) {
+    this.getLeads();
+    this.getReports();
+    this.getTasks();
+
+    this.allUsers.forEach((ele: any) => {
+      console.log(this.allUsers)
+    })
   }
 
   ngAfterViewInit() {
@@ -44,23 +44,22 @@ export class ReportsComponent implements AfterViewInit {
     this.cd.detectChanges();
   }
 
-  exportexcel(): void
-  {
+  exportexcel(): void {
     /* pass here the table id */
     let element = document.getElementById('report-table');
-    const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
 
     /* generate workbook and add the worksheet */
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
 
-    /* save to file */  
+    /* save to file */
     XLSX.writeFile(wb, this.fileName);
 
   }
   handleOnSlide(type: string) {
     let scrollValue;
-console.log(this.content)
+    console.log(this.content)
     if (this.content.nativeElement.scrollWidth > window.innerWidth) {
       // Removing 110px which is the white space on the left and right of the content and the scrollbar
       if (type === 'left') {
@@ -84,8 +83,56 @@ console.log(this.content)
       this.isRightDisabled = true;
     }
   }
-  
-  
+  getLeads() {
+    this.api.genericGet('/get-lead').subscribe({
+      next: (res: any) => {
+        this.leads = res
+        this.leads.forEach((ele: any) => {
+          this.leadsCount = this.leadsCount + 1
+          // console.log(ele.status)
+          if (ele.outcome === 'completed') {
+            this.approvedCount = this.approvedCount + 1
+          } else {
+            this.rejectCount = this.rejectCount + 1
+          }
+
+        });
+        this.allUsers.push(res)
+      },
+      error: (error: any) => {
+        console.error('Error:', error);
+      }
+    });
+  }
+  getReports() {
+    this.api.genericGet('/get-report')
+      .subscribe({
+        next: (res: any) => {
+          this.reports = res
+          console.log(res)
+          this.dataSource = this.reports;
+          this.allUsers.push(res)
+          // console.log(this.allUsers)
+        },
+        error: (err: any) => this.snackBar.open(err, 'Ok', { duration: 3000 }),
+        complete: () => { }
+      })
+  }
+  getTasks() {
+    this.api.genericGet('/get-task').subscribe({
+      next: (res: any) => {
+        this.tasks = res;
+
+        this.allUsers.push(res)
+        console.log(this.allUsers)
+
+      },
+      error: (error: any) => {
+        console.error('Error:', error);
+      }
+    });
+
+  }
   panelOpenState = false;
 
 }

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import {MatPaginator} from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -16,9 +16,13 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class LeadsComponent {
   displayedColumns: string[] = ['name','surname', 'gender', 'ID', 'actions'];
- 
+  isLeftDisabled: boolean = true;
+  isRightDisabled: boolean = false;
+  
+  @ViewChild('content') content!: ElementRef;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  leads:any;
 
   constructor(private dialog:MatDialog, private api:ApiService, private snackbar:MatSnackBar) {
     this.getLeads()
@@ -32,6 +36,7 @@ export class LeadsComponent {
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        this.leads = res;
         console.log(res)
       },
       error: (error: any) => {
@@ -85,7 +90,32 @@ export class LeadsComponent {
       complete: () => { }
     });
 }
+handleOnSlide(type: string) {
+  let scrollValue;
+  console.log(this.content)
+  if (this.content.nativeElement.scrollWidth > window.innerWidth) {
+    // Removing 110px which is the white space on the left and right of the content and the scrollbar
+    if (type === 'left') {
+      scrollValue = this.content.nativeElement.scrollLeft - (window.innerWidth - 110);
+    } else {
+      scrollValue = this.content.nativeElement.scrollLeft + (window.innerWidth - 110);
+    }
 
+    // Added this to add an animation while scrolling...
+    this.content.nativeElement.scrollTo({
+      left: scrollValue,
+      behavior: 'smooth'
+    });
+
+    let totalUsedWidth = scrollValue + window.innerWidth;
+
+    this.isRightDisabled = (totalUsedWidth >= this.content.nativeElement.scrollWidth);
+    this.isLeftDisabled = (scrollValue < 1);
+  } else {
+    this.isLeftDisabled = true;
+    this.isRightDisabled = true;
+  }
+}
 
 
 }
