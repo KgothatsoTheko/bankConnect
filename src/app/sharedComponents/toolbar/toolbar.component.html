@@ -1,5 +1,5 @@
 <div class="loader loading-overlay" *ngIf="isLoading == true" ></div>
-<mat-toolbar>
+<mat-toolbar *ngIf="isToolbarEnabled">
     <div class="logo"(click)="landing()">
         <img src="../../../assets/images/logo.png"  alt="">
     </div>
