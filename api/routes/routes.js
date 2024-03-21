@@ -16,6 +16,13 @@ const multer = require('multer');
     router.post('/update-lead/:leadName', leadController.updateLead)
     router.delete('/leads/:email', leadController.deleteLead)
 
+    //new Admin routes
+        // New Lead routes
+        const adminController = require('../controllers/adminControllers');
+        router.get('/', adminController.defaultRoute);
+        router.post('/add-admin', adminController.addAdmin);
+        router.get('/get-admin', adminController.getAdmin)
+
     // Add task routes
     const taskController = require('../controllers/taskController');
     router.get('/', taskController.defaultRoute);

@@ -8,6 +8,8 @@ import { TasksComponent } from './components/tasks/tasks.component';
 import { QrCodeComponent } from './components/qr-code/qr-code.component';
 import { EmployeesComponent } from './components/employees/employees.component';
 import { ReportsComponent } from './components/reports/reports.component';
+import { AdminRegisterComponent } from './forms/admin-register/admin-register.component';
+import { WelcomeMessageComponent } from './welcome-message/welcome-message.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/Login', pathMatch: 'full' },
@@ -19,10 +21,13 @@ const routes: Routes = [
       { path: 'tasks', component: TasksComponent },
       { path: 'qrCode', component: QrCodeComponent },
       {path: 'profile', component: EmployeesComponent},
-      {path: 'report', component: ReportsComponent}
-
+      {path: 'report', component: ReportsComponent},
     ]
-  }
+  },
+  {path: 'registration', component: AdminRegisterComponent},
+  {path: 'welcome', component: WelcomeMessageComponent},
+
+
 
 ];
 

@@ -1,19 +1,23 @@
-<div *ngIf="!login" class="flex">
+<div *ngIf="!login && isQR" class="flex">
     <div>
-        <qrcode (qrCodeURL)="onChangeURL($event)" [qrdata]="myAngularxQrCode" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+        <qrcode (qrCodeURL)="onChangeURL($event)" [qrdata]="myAngularxQrCode" [width]="256"
+            [errorCorrectionLevel]="'M'"></qrcode>
     </div>
 
-    <div>
+    <div *ngIf="isQR">
         <h2>Your QR code is <span>Ready!</span> </h2>
-      <h5 *ngIf="istext">Take a photo of the QR code to scan and login <br><br>
-        Click <a [href]="qrCodeDownloadLink" download="qrcode"> <span>here</span> </a>
+        <h5 *ngIf="istext">Take a photo of the QR code to scan and login <br><br>
+            Click <a [href]="qrCodeDownloadLink" download="qrcode"> <span>here</span> </a>
             to <b>Download</b> the QR code and use it next time you login. <br><br>
             Check your profile if you need it again.
-      </h5> 
+        </h5>
     </div>
 </div>
 
 <div *ngIf="login">
+    <button mat-raised-button class="" (click)="action.isStart ? action.stop() : action.start()">{{action.isStart ?
+        'Stop' : 'Start'}}</button>
+    <button mat-raised-button color="primary" (click)="viewData(action)">Done</button>
     <!-- For camera -->
     <ngx-scanner-qrcode #action="scanner"></ngx-scanner-qrcode>
 
@@ -21,11 +25,16 @@
     <p *ngIf="action.isLoading">⌛ Loading...</p>
 
     <!-- start -->
-    <button mat-raised-button class="" (click)="action.isStart ? action.stop() : action.start()">{{action.isStart ? 'Stop' : 'Start'}}</button>
-
-    <button mat-raised-button color="primary" (click)="viewData(action)">Done</button>
  
-
 </div>
 
-<button mat-raised-button color="primary" class="login" (click)="login = !login">Login</button>
+<div class="flex center-center full-width column" *ngIf="istext">
+    <img src="../../../assets/images/logo.png" width="45%" height="20%" alt="">
+    <div>
+        <h2>Click the <span>SCAN</span> button to scan your QR code </h2>
+        <div class="full-width flex center-center">
+            <button  mat-raised-button color="primary" class="login"
+                (click)="login = !login">SCAN</button>
+        </div>
+    </div>
+</div>

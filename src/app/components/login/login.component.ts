@@ -29,15 +29,20 @@ export class LoginComponent {
   
 
   submit(){
-    this.service.genericGet('/get-customer').subscribe({
+
+    if(this.signInForm.invalid){
+      this.snackbar.open("fill in the form")
+    }
+    
+    this.service.genericGet('/get-admin').subscribe({
       next: (res: any) => {
         const user = res.find((admin: any) => admin.email == this.signInForm.controls['email'].value);
         if (user) {
           this.snackbar.open('User exists', 'OK', { duration: 3000 });
           sessionStorage.setItem('qr-user', JSON.stringify(user));
-          this.router.navigate(['dashboard/qrCode'])
+          this.router.navigate(['welcome'])
   }else{
-   this.snackbar.open("fill in the form", "OK", {duration:3000})
+   this.snackbar.open("Invalid email or Password", "OK", {duration:3000})
   }
 }
     })
