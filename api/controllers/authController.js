@@ -1,5 +1,6 @@
 const Customer = require('../models/customer.js')
-const Role = require('../models/role.js')
+const Login = require('../models/auth.js')
+// const Role = require('../models/role.js')
 // hash the password
 const bcrypt = require('bcrypt')
 // create json web token
@@ -15,7 +16,9 @@ module.exports = {
             const payload = { ...req.body, };
             payload.pin = hashPin
             const newCustomer = new Customer(payload)
-            const result = await newCustomer.save()
+            const newLogin = new Login(payload)
+            // const result = await newCustomer.save()
+            const result = await newLogin.save()
 
              // Send email to the created email address
              const mailOptions = {
@@ -38,23 +41,23 @@ module.exports = {
     
     loginRoute: async (req, res, next) => {
         try {
-            const customer = await Customer.findOne({ email: req.body.email })
+            const login = await Login.findOne({ email: req.body.email })
     
-            // If customer not found, return 404
-            if (!customer) {
+            // If login not found, return 404
+            if (!login) {
                 return res.status(404).send("User Not found!");
             }
     
             // Check if the PIN is correct
-            const isPinCorrect = await bcrypt.compare(req.body.pin.toString(), customer.pin.toString());
+            const isPinCorrect = await bcrypt.compare(req.body.pin.toString(), login.pin.toString());
             if (!isPinCorrect) {
                 return res.status(404).send("Pin is Incorrect!");
             }
     
             // Generate JWT token
             const token = jwt.sign({
-                id: customer._id,
-                isAdmin: customer.isAdmin,
+                id: login._id,
+                isAdmin: login.isAdmin,
             }, process.env.JWT_SECRET);
     
             // Set the token as a cookie and send a response
@@ -62,7 +65,7 @@ module.exports = {
             res.status(200).json({
                 status: 200,
                 message: "Login Success",
-                data: customer
+                data: login
             });
     
         } catch (error) {
