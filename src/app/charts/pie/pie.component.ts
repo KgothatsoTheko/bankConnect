@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-pie',
@@ -10,33 +10,47 @@ import { ChartConfiguration, ChartOptions } from 'chart.js';
 export class PieComponent {
   title = 'ng2-charts-demo';
 
-  public pieChartData: ChartConfiguration<'pie'>['data'] = {
-    labels: [
-      'New Leads',
-      'Accepted,',
-      'Rejected'
-    ],
-    datasets: [
-      {
-        data: [15,7,8],
-        borderColor: 'orange',
-        backgroundColor: ['Blue', 'Red', 'Crimson']
-      }
+  public doughnutChartLabels: string[] = ['Rejected', 'pending', 'Approved'];
+  public doughnutChartDatasets: ChartConfiguration<'doughnut'>['data']['datasets'] = [
+    {
+      data: [0, 0], label: 'Outcome Report', backgroundColor: [
+        'rgb(255, 99, 132)',
+        'rgb(54, 162, 235)',
+        'rgb(255, 205, 86)']
+    },
 
-    ]
-  };
-  public pieChartOptions: ChartOptions<'pie'> = {
+  ];
+  public doughnutChartOptions: ChartConfiguration<'doughnut'>['options'] = {
     responsive: false
   };
-  public pieChartLegend = true;
 
-
-  images = [700, 800, 807].map((n) => `https://picsum.photos/id/${n}/900/500`);
-
-  constructor(config: NgbCarouselConfig) {
-    // customize default values of carousels used by this component tree
-    config.interval = 2000;
-    config.keyboard = true;
-    config.pauseOnHover = true;
+  constructor(private api: ApiService) {
+   this.getReports()
+  }
+  getReports(){
+    this.api.genericGet('/get-report').subscribe({
+      next: (res: any) => {
+        // console.log(res);
+        const reports = res;
+        const reportCount: { [key: string]: number } = {
+          'pending': 15,
+          'approved': 8,
+          'rejected': 7
+        };
+        // console.log(reportCount)
+      reports.forEach((report: any) => {
+          const outcome = report.outcome.toLowerCase();
+          if (reportCount.hasOwnProperty(outcome)) {
+            reportCount[report]++;
+            // console.log("Ekse Shimza",reportCount)
+          } 
+        });
+        this.doughnutChartLabels = Object.keys(reportCount);
+        this.doughnutChartDatasets[0].data = Object.values(reportCount);
+      },
+      error: (error: any) => {
+        console.error('Error:', error);
+      }
+    });
   }
 }

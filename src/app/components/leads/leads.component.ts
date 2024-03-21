@@ -14,7 +14,7 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class LeadsComponent {
   displayedColumns: string[] = ['name', 'surname', 'gender', 'ID', 'actions'];
- 
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -30,6 +30,7 @@ export class LeadsComponent {
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+      
       },
       error: (error: any) => {
         console.error('Error:', error);

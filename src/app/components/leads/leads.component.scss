@@ -18,57 +18,89 @@ img {
     width: 100%;
 }
 
-//content
-.content{
-height: 86%;
+.leads-slider {
+    display: flex;
+    width: 856px;
+    justify-content: space-between;
+    gap: 5em;
 }
 
+//content
+.content {
+    height: 86%;
+}
+.inner-content {
+    position: relative;
+    padding: 0 1em;
+
+    .left,
+    .right {
+        position: absolute;
+        top: 100px;
+        z-index: 3;
+    }
+
+    .right {
+        right: 0;
+    }
+
+    .slider {
+        overflow-x: scroll;
+    }
+
+    // Added this to hide the scroll bar
+    .slider::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+
 //width
-.width-80{
+.width-80 {
     width: 80%;
 }
 
 //spacebetween
-.spacebetween{
+.spacebetween {
     justify-content: space-between;
     align-items: center;
 }
 
 //buttons
-.addBtn{
+.addBtn {
     background-color: orange !important;
 }
 
 //actions
-.delete{
+.delete {
     background-color: lightgrey;
     color: white;
 }
 
-.delete:hover{
+.delete:hover {
     background-color: orange;
 }
 
-.view{
+.view {
     background-color: lightgrey;
     color: white;
 }
 
-.view:hover{
+.view:hover {
     background-color: orange;
 }
 
-.make-customer{
+.make-customer {
     background-color: lightgrey;
     color: white;
 }
 
-.make-customer:hover{
+.make-customer:hover {
     background-color: orange;
 }
 
 //h3
-h4{
+h4 {
     margin: 0;
     color: #000000;
     width: 20%;
@@ -76,16 +108,16 @@ h4{
 }
 
 //icons
-img{
+img {
     width: 100% !important;
     height: 100% !important;
 }
 
 //actions
-.actions{
-display: flex;
-justify-content: space-between;
-align-items: center;
+.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 //table
