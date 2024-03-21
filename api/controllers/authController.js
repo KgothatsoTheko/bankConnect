@@ -1,5 +1,6 @@
 const Customer = require('../models/customer.js')
-const Role = require('../models/role.js')
+const Login = require('../models/auth.js')
+// const Role = require('../models/role.js')
 // hash the password
 const bcrypt = require('bcrypt')
 // create json web token
@@ -15,7 +16,9 @@ module.exports = {
             const payload = { ...req.body, };
             payload.pin = hashPin
             const newCustomer = new Customer(payload)
+            // const newLogin = new Login(payload)
             const result = await newCustomer.save()
+            // const result = await newLogin.save()
 
              // Send email to the created email address
              const mailOptions = {
@@ -40,7 +43,7 @@ module.exports = {
         try {
             const customer = await Customer.findOne({ email: req.body.email })
     
-            // If customer not found, return 404
+            // If login not found, return 404
             if (!customer) {
                 return res.status(404).send("User Not found!");
             }

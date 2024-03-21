@@ -9,10 +9,14 @@ import { ApiService } from '../services/api.service';
 export class ContentCardsComponent {
   leadsCount: number = 0;
   tasksCount: number = 0;
+  customerCount: number =0;
+  reportsCount: number = 0;
 
   constructor(private api: ApiService) {
     this.getLeads();
-    this.getTasks()
+    this.getTasks();
+    this.getCustomer();
+    this.getReports();
   }
 
   getLeads() {
@@ -31,9 +35,45 @@ export class ContentCardsComponent {
     this.cards[1].number = this.leadsCount;
   }
 
+  updateCustomer(){
+    this.cards[0].number = this.customerCount
+  }
+
   updateTasks() {
     this.cards[2].number = this.tasksCount;
   }
+
+  getCustomer(){
+
+    this.api.genericGet('/get-customer').subscribe({
+      next: (res: any) => {
+        this.customerCount = res.length;
+        this.updateCustomer();
+      },
+      error: (error: any) => {
+        console.error('Error:', error);
+      }
+    });
+  }
+
+
+  updateReports() {
+    this.cards[3].number = this.reportsCount;
+  }
+
+  getReports(){
+    this.api.genericGet('/get-report').subscribe({
+      next: (res: any) => {
+        this.customerCount = res.length;
+        this.updateReports();
+      },
+      error: (error: any) => {
+        console.error('Error:', error);
+      }
+    });
+  }
+
+
 
   getTasks(){
     this.api.genericGet('/get-task').subscribe({

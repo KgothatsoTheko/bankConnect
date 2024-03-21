@@ -1,0 +1,36 @@
+.main-container{
+height: 100vh;
+}
+
+mat-card{
+    border: 1px solid grey;
+    padding: 10px;
+    width: 65%;
+    background-color:white;
+    box-shadow: 3px 1px;
+    border-radius: 7px;
+}
+
+h2{
+    color: Black;
+}
+
+mat-form-field{
+    width: 100%;
+}
+
+//width
+.width-80{
+    width: 80%;
+}
+
+//buttons
+.btn-cancel {
+    background-color: black !important;
+    color: white !important;
+}
+
+.btn-submit{
+    background-color: #f9a71b !important;
+    color: white;
+}

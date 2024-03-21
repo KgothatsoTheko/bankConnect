@@ -30,47 +30,47 @@ module.exports = {
             res.status(500).send(error)
         }
     },
-    uploadFile: async (req, res) => {
-        const { files } = req;
+    // uploadFile: async (req, res) => {
+    //     const { files } = req;
 
-        let { fieldname, originalname, mimetype, buffer } = files[0]
-        let newFile = new File({
-            filename: originalname,
-            contentType: mimetype,
-            length: buffer.length,
-            fileId: pictureId,
-        })
+    //     let { fieldname, originalname, mimetype, buffer } = files[0]
+    //     let newFile = new File({
+    //         filename: originalname,
+    //         contentType: mimetype,
+    //         length: buffer.length,
+    //         fileId: pictureId,
+    //     })
 
-        try {
-            const uploadStream = bucket.openUploadStream(fieldname)
-            const readBuffer = new Readable();
-            readBuffer.push(buffer)
-            readBuffer.push(null)
+    //     try {
+    //         const uploadStream = bucket.openUploadStream(fieldname)
+    //         const readBuffer = new Readable();
+    //         readBuffer.push(buffer)
+    //         readBuffer.push(null)
 
-            const isUploaded = await new Promise((resolve, reject) => {
-                readBuffer.pipe(uploadStream)
-                    .on("finish", resolve("successfull"))
-                    .on("error", reject("error occured while creating stream"))
-            })
+    //         const isUploaded = await new Promise((resolve, reject) => {
+    //             readBuffer.pipe(uploadStream)
+    //                 .on("finish", resolve("successfull"))
+    //                 .on("error", reject("error occured while creating stream"))
+    //         })
 
-            newFile.id = uploadStream.id
-            const savingResults = await newFile.save();
-            if (!savingResults) {
-                res.status(404).send("error occured while saving our work")
-            }
-            res.send({ file: savingResults, message: "file uploaded successfully" })
-        } catch (error) {
-            console.log('error', error)
-        }
-    },
-    getFile: (req, res) => {
-        const { id } = req.params;
-        let downloadStream = bucket.openDownloadStream(new mongoose.Types.ObjectId(id))
-        downloadStream.on("file", (file) => {
-            res.set("Content-Type", file.contentType)
-        })
-        downloadStream.pipe(res)
-    },
+    //         newFile.id = uploadStream.id
+    //         const savingResults = await newFile.save();
+    //         if (!savingResults) {
+    //             res.status(404).send("error occured while saving our work")
+    //         }
+    //         res.send({ file: savingResults, message: "file uploaded successfully" })
+    //     } catch (error) {
+    //         console.log('error', error)
+    //     }
+    // },
+    // getFile: (req, res) => {
+    //     const { id } = req.params;
+    //     let downloadStream = bucket.openDownloadStream(new mongoose.Types.ObjectId(id))
+    //     downloadStream.on("file", (file) => {
+    //         res.set("Content-Type", file.contentType)
+    //     })
+    //     downloadStream.pipe(res)
+    // },
     //Getting data from backend
     getLead: async (req, res) => {
         try {

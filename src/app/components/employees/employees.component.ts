@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDatepicker } from '@angular/material/datepicker';
 import { ApiService } from 'src/app/services/api.service';
 
@@ -7,7 +7,7 @@ import { ApiService } from 'src/app/services/api.service';
   templateUrl: './employees.component.html',
   styleUrls: ['./employees.component.scss']
 })
-export class EmployeesComponent implements OnInit{
+export class EmployeesComponent implements AfterViewInit{
   @ViewChild ('picker', {static:true}) picker!:MatDatepicker<any>
   minDate: Date;
 
@@ -15,14 +15,11 @@ export class EmployeesComponent implements OnInit{
     this.minDate = new Date();
     this.user = this.session.get('qr-user', 'session')
   }
+  ngAfterViewInit(): void {
+    // window.location.reload()
+  }
 
   user:any
 
- ngOnInit(): void {
-    // Open the datepicker when the component initializes
-    setTimeout(() => {
-      this.picker.open();
-    });
-  }
 
 }

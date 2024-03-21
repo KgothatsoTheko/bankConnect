@@ -87,20 +87,6 @@
         </table>
         <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
       </div>
-      <div class="inner-content" #content>
-      <div class="leads-slider m-t-3em">
-        <mat-card *ngFor="let i of leads">
-          <mat-card-title class="text-center">Leads</mat-card-title>
-          <mat-card-content>
-            <label>{{i.ID}}</label><br><br>
-            <label>Name:{{i.name}} {{i.surname}}</label><br><br>
-            <label>Contact:{{i.contact}} </label><br><br>
-            <label>Gender:{{i.gender}} </label><br><br>
-            <label>Reference:{{i.reference}} </label><br><br>
-          </mat-card-content>
-        </mat-card>
-      </div>
-     </div>
     </div>
   </div>
 </div>

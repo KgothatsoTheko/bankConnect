@@ -30,12 +30,12 @@ import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
 
 import { EmployeesComponent } from './components/employees/employees.component';
 import { QrCodeComponent } from './components/qr-code/qr-code.component';
-
 import { PieComponent } from './charts/pie/pie.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { SliderComponent } from './sharedComponents/slider/slider.component';
+import { WelcomeMessageComponent } from './welcome-message/welcome-message.component';
+import { AdminRegisterComponent } from './forms/admin-register/admin-register.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,6 +61,8 @@ import { SliderComponent } from './sharedComponents/slider/slider.component';
     // NgxQRCodeModule
     PieComponent,
     SliderComponent,
+    WelcomeMessageComponent,
+    AdminRegisterComponent,
   ],
   imports: [
     BrowserModule,
