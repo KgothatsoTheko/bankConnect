@@ -1,6 +1,12 @@
+.main-contanier{
+    height: 100vh;
+}
+
 .int-customer{
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2em;
 }
 .tool-height{
     height: 64px !important;
