@@ -81,16 +81,23 @@ module.exports = {
         }
     },
     //Updating data to mongo
-    updateLead:  async (req, res) => {
+    updateLead: async (req, res) => {
         try {
-          const leadId = req.params.taskName;
-          const updatedLead = req.body.status; 
-          const updatedLeadForm = await Task.findByIdAndUpdate(leadId, { lead: updatedLead }, { new: true });
-           res.status(200).json(updatedLeadForm);
+          const leadName = req.params.leadName;
+          console.log('Updating lead:', leadName);
+          const updatedLeadData = req.body;
+          console.log('New lead data:', updatedLeadData);
+          const updatedLead = await Lead.findOneAndUpdate({ name: leadName }, updatedLeadData, { new: true });
+          console.log('Updated lead:', updatedLead);
+          if (!updatedLead) {
+            return res.status(404).json({ message: 'Lead not found' });
+          }
+          res.status(200).json(updatedLead);
         } catch (error) {
-           res.status(500).json({ message: 'Internal server error' });
+          console.error('Error updating lead:', error);
+          res.status(500).json({ message: 'Internal server error' });
         }
-    },
+      },
     //Updating data to mongo
     deleteLead: async (req, res) => {
         const query = { ...req.params }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,17 +6,37 @@ import { Router } from '@angular/router';
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss']
 })
-export class ToolbarComponent {
+export class ToolbarComponent implements OnInit {
   isLoading: boolean = false;
+  isToolbarEnabled: boolean = true; 
   constructor(private router:Router){}
   menuItems: any =[
+    
+   {label:'profile', route:'/dashboard/profile'},
    {label:'Customers', route:'dashboard/customers'},
    {label:'Tasks', route:'/dashboard/tasks'},
    {label:'Leads', route:'/dashboard/leads'},
-   {label:'Reports', route:'/dashboard/reports'},
+   {label:'Reports', route:'/dashboard/report'},
    {label:'Logout', route:'/Login'},
 
   ]
+
+  ngOnInit() {
+    this.disableToolbarIfQrCodeRoute();
+  }
+
+  disableToolbarIfQrCodeRoute() {
+    const currentRoute = this.router.url;
+    if (currentRoute === '/dashboard/qrCode') {
+      this.isToolbarEnabled = false;
+    } else {
+      this.isToolbarEnabled = true;
+    }
+  }
+
+  disable(){
+
+  }
 
   animation() {
     this.isLoading = true;
@@ -37,7 +57,7 @@ export class ToolbarComponent {
 
   logout(){
     sessionStorage.clear()
-   return  this.router.navigate(['login'])
+   return  this.router.navigate(['Login'])
   }
 
 }

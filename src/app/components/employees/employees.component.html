@@ -1,0 +1,58 @@
+<div class="main-container gap-1em full-width">
+
+        <div class="mini-container gap-1em flex">
+            <div class="profile-pic flex center-center flex">
+                <img src="../../../assets/images/svgProfile-pic.png" height="100%" width="100%" alt="">
+            </div>
+            <div class="flex infor column ">
+                <h3>
+                    Name: {{user.name}}
+                </h3>
+                <h3>
+                   Surname: {{user.surname}}
+                </h3>
+                <h3>
+                    Email: {{user.email}}
+                </h3>
+                <h3>
+                    ID: {{user.id}}
+                </h3>
+            </div>
+        </div>
+
+
+        <div class="mini-container flex gap-1em">
+            <div class="date half-width full-height">
+                <mat-card class="Calendar full-height flex center-center">
+                     <h2>
+                        Calendar
+                     </h2>
+                </mat-card>
+               
+            </div>
+
+            <div class="events half-width full-height">
+
+                <mat-card class="Calendar full-height flex center-center">
+                    <h2>
+                       up-coming events...
+                    </h2>
+               </mat-card>
+
+            </div>
+        </div>
+
+
+        <div class="mini-container qrCode">
+            <app-qr-code></app-qr-code>
+        </div>
+
+        <div class="mini-container flex center-center"> 
+            <div class="pie">
+                <mat-card>
+                    <!-- <app-tasks-doughnut></app-tasks-doughnut> -->
+                </mat-card>
+            </div> 
+        </div>
+
+</div>

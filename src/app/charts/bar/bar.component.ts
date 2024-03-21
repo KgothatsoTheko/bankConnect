@@ -31,7 +31,6 @@ export class BarComponent {
   fetchData() {
     this.api.genericGet('/get-lead').subscribe({
       next: (res: any) => {
-        console.log(res);
         const tasks = res; 
 
         const statusCount: { [key: string]: number } = {

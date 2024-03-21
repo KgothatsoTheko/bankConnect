@@ -9,10 +9,10 @@ body {
 .content {
   width: 90%;
   height: 55%;
-  border: 1px solid grey;
   border-radius: 7px;
   overflow: hidden;
-  box-shadow: 2px 3px ;
+  border: 1px solid gray;
+  box-shadow: 2px 2px grey;
   animation-name: slideLeft;
   animation-duration: 2s;
   animation-iteration-count: 1;
@@ -22,7 +22,7 @@ body {
 }
 
 .content:hover {
-  border: 1px solid orange;
+
   color: orange;
 }
 

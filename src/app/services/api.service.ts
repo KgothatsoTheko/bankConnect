@@ -10,6 +10,7 @@ export class ApiService {
   constructor(private http: HttpClient) {
   }
 
+  
   genericPost(endpoint: any, body: any) {
     return this.http.post(this.serverUrl + endpoint, body)
   }
@@ -24,5 +25,10 @@ export class ApiService {
 
   genericUpdate(endpoint: any, body: any){
     return this.http.post(this.serverUrl + endpoint, body)
+  }
+
+  get(key: string, sessionType: string): any {
+    let data = sessionType === 'session' ? sessionStorage.getItem(key) : localStorage.getItem(key);
+    return data ? JSON.parse(data) : data;
   }
 }

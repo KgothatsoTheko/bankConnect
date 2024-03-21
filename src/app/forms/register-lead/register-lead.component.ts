@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./register-lead.component.scss']
 })
 export class RegisterLeadComponent {
-DOB!:string;
+  DOB!:string;
   ID:any;
   Date:any;
   year!: any;
@@ -20,11 +21,13 @@ DOB!:string;
   age:any;
   citizen:any;
   isUpdate: boolean = false;
+  qrCodeData: string = '';
+
 
 registerForm: FormGroup
 
 constructor(@Inject(MAT_DIALOG_DATA) public data:any,private matDialogRef: MatDialogRef<RegisterLeadComponent>,
-   private fb:FormBuilder, private snackbar:MatSnackBar, private api:ApiService){
+   private fb:FormBuilder, private snackbar:MatSnackBar, private api:ApiService, private router:Router){
   this.registerForm = new FormGroup({
     name: new FormControl('',[Validators.required]),
     surname: new FormControl('',[Validators.required]),
@@ -80,6 +83,7 @@ submit(){
   this.api.genericPost('/leads', formValue).subscribe({
     next: (res: any) => {
       console.log(res);
+      sessionStorage.setItem('qr-user', JSON.stringify(res));
     },
     error: (err: any) => console.log("error", err),
     complete: () => { }
@@ -114,5 +118,13 @@ citizenship(){
 ageCalc(){
      let answer =  new Date().getFullYear() - this.year
      return answer
+}
+
+generateQRCode() {
+  const dataFromStorage = sessionStorage.getItem('qr-user');
+  if (dataFromStorage) {
+    this.qrCodeData = dataFromStorage;
+  }
+
 }
 }

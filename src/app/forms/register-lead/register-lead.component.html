@@ -1,4 +1,5 @@
 <div class="main-container">
+  
     <mat-card>
         <form class="flex column" [formGroup]="registerForm">
             <div class="flex center-center">
@@ -26,7 +27,7 @@
 
                 <mat-form-field appearance="fill">
                     <mat-label>age</mat-label>
-                    <input matInput type="text" formControlName="age" [value]="age" placeholder="26">
+                    <input matInput type="number" minlength="2" formControlName="age" [value]="age" placeholder="26">
                     <mat-error *ngIf="registerForm.get('age')?.hasError('required')">
                         description is required
                     </mat-error>
@@ -82,16 +83,23 @@
 
                 <mat-form-field appearance="fill">
                     <mat-label>Contact</mat-label>
-                    <input type="number" matInput formControlName="contact" placeholder="nicholasmaluleka@gmail.com">
+                    <input type="text" minlength="10" maxlength="10" matInput formControlName="contact" placeholder="0796682774" required>
                     <mat-error *ngIf="registerForm.get('contact')?.hasError('required')">
-                        contact is required
+                        Contact is required
+                    </mat-error>
+                    <mat-error *ngIf="registerForm.get('contact')?.hasError('minlength')">
+                        Contact is less than 10 digits
+                    </mat-error>
+                    <mat-error *ngIf="registerForm.get('contact')?.hasError('maxlength')">
+                        Contact is more than 10 digits
                     </mat-error>
                 </mat-form-field>
+                
             </div>
 
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="fill" class="lets">
                 <mat-label>reference</mat-label>
-                <input matInput type="text" formControlName="reference" required>
+                <input matInput type="text" minlength="10" formControlName="reference" required>
                 <mat-error *ngIf="registerForm.get('reference')?.hasError('required')">
                     reference is required
                 </mat-error>
@@ -104,3 +112,4 @@
         </form>
     </mat-card>
 </div>
+<app-qr-code [qrData]="qrCodeData" hidden></app-qr-code>
