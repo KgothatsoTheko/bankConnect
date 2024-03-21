@@ -13,7 +13,7 @@ export class ToolbarComponent implements OnInit {
   menuItems: any =[
     
    {label:'profile', route:'/dashboard/profile'},
-   {label:'Customers', route:'dashboard/customers'},
+   {label:'Customers', route:'/dashboard/customers'},
    {label:'Tasks', route:'/dashboard/tasks'},
    {label:'Leads', route:'/dashboard/leads'},
    {label:'Reports', route:'/dashboard/report'},
