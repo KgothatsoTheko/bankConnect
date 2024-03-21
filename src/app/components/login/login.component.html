@@ -51,7 +51,7 @@
                             <input type="text" matInput required formControlName="email">
                            
                             <mat-error *ngIf="signInForm.get('email')?.hasError('required')">
-                                Email ID is <strong>required</strong>
+                                Email is <strong>required</strong>
                             </mat-error>
                         
                         </mat-form-field>
@@ -73,11 +73,15 @@
                     </div>
                 </form>
     
-                  <div class="flex pointer space-between">
-                    <p>Forgot Password?</p> 
-                  </div>
-                  <button mat-raised-button class="btn justify-center" (click)=" submit()">LOG IN</button>
+                <div class="flex center-center gap-1em">
+
+                    <button mat-raised-button class="btn justify-center" (click)=" submit()">LOG IN</button>
+                </div>
+               - or -
+               <button mat-raised-button class="btn justify-center" (click)="QRcode()">Scan QR code</button>
+
             </div>
+            
             <div class="right center-center">
                 <img src="../../../assets/logo.png" width="100%" height="100%">
             </div>

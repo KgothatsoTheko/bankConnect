@@ -8,6 +8,9 @@ import { TasksComponent } from './components/tasks/tasks.component';
 import { QrCodeComponent } from './components/qr-code/qr-code.component';
 import { EmployeesComponent } from './components/employees/employees.component';
 import { ReportsComponent } from './components/reports/reports.component';
+import { AdminRegisterComponent } from './forms/admin-register/admin-register.component';
+import { WelcomeMessageComponent } from './welcome-message/welcome-message.component';
+import { CustomerComponent } from './components/customer/customer.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/Login', pathMatch: 'full' },
@@ -15,14 +18,18 @@ const routes: Routes = [
   {
     path: 'dashboard', component: DashboardComponent, children: [
       { path: 'home', component: HomeComponent },
+      { path: 'customers', component: CustomerComponent },
       { path: 'leads', component: LeadsComponent },
       { path: 'tasks', component: TasksComponent },
       { path: 'qrCode', component: QrCodeComponent },
-      {path: 'profile', component: EmployeesComponent},
-      {path: 'report', component: ReportsComponent}
-
+      { path: 'profile', component: EmployeesComponent },
+      { path: 'report', component: ReportsComponent },
     ]
-  }
+  },
+  { path: 'registration', component: AdminRegisterComponent },
+  { path: 'welcome', component: WelcomeMessageComponent },
+
+
 
 ];
 

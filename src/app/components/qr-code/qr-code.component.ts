@@ -19,6 +19,7 @@ export class QrCodeComponent implements OnInit {
   constructor(private router: Router, private service: ApiService) {}
   isLoading: boolean = false;
   istext: boolean = true; 
+  isQR:boolean = true;
 
   ngOnInit(): void {
     this.myAngularxQrCode = sessionStorage.getItem('qr-user') || '';
@@ -27,6 +28,7 @@ export class QrCodeComponent implements OnInit {
     console.log('Parsed QR data:', this.parseQRData());
 
     this.disableToolbarIfQrCodeRoute()
+    this.disableTextfQrCodeRoute()
   }
 
   onChangeURL(url: SafeUrl) {
@@ -35,7 +37,7 @@ export class QrCodeComponent implements OnInit {
 
   viewData(action: any) {
     console.log(action.data.value.toString());
-    this.router.navigate(['/dashboard/home']);
+    this.router.navigate(['/dashboard/profile']);
   }
 
   parseQRData() {
@@ -65,6 +67,15 @@ export class QrCodeComponent implements OnInit {
       this.istext = false;
     } else {
       this.istext = true;
+    }
+  }
+
+  disableTextfQrCodeRoute() {
+    const currentRoute = this.router.url;
+    if (currentRoute === '/dashboard/qrCode') {
+      this.isQR = false;
+    } else {
+      this.isQR = true;
     }
   }
   
