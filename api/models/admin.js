@@ -10,7 +10,6 @@ const admin = new mongoose.Schema({
     email: { type: String, required: true, lowercase: true, index: { unique: true } },
     contact: { type: Number, required: true },
     password: { type: String, required: true },
-    confirmPassword: { type: String, required: true },
 
 })
 

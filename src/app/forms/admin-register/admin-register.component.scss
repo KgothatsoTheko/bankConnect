@@ -34,3 +34,14 @@ mat-form-field{
     background-color: #f9a71b !important;
     color: white;
 }
+
+.password-strength-indicator {
+    display: flex;
+    margin-bottom: 1em;
+}
+
+.strength-color {
+    width: 40%;
+    height: 5px;
+    border-radius: 3px;
+}

@@ -34,15 +34,30 @@ constructor(
     DOB: new FormControl(this.year+this.month+this.day,[Validators.required]),
     age: new FormControl(this.age,[Validators.required]),
     ID: new FormControl('',[Validators.required, Validators.minLength(13), Validators.maxLength(13)]),
-    email: new FormControl(''),
+    email: new FormControl('', [Validators.required,Validators.email]),
     citizenship: new FormControl(this.citizen,[Validators.required]),
     gender: new FormControl(this.gender,Validators.required),
     contact: new FormControl('', [Validators.required, Validators.maxLength(10)]),
     password: new FormControl('',[Validators.required, Validators.minLength(4), Validators.maxLength(8)]),
-    confirmPassword: new FormControl ('', [Validators.required])
   })
 this.Date = new Date().getFullYear()
 }
+
+getPasswordStrengthColor(color: string): string {
+  const password = this.registerForm.get('password')?.value || '';
+  const passwordLength = password.length;
+
+  if (passwordLength >= 8 && color === 'green') {
+      return 'green'; 
+  } else if (passwordLength >= 6 && color === 'yellow') {
+      return 'yellow'; 
+  } else if (passwordLength >= 4 && color === 'red') {
+      return 'red'; 
+  } else {
+      return 'grey'; 
+  }
+}
+
 
 ngOnInit() {
   this.year = 'YY';
@@ -70,12 +85,10 @@ submit(){
     complete: () => { }
   });
 
-  if(this.registerForm.controls['password'].value !== this.registerForm.controls['confirmPassword'].value){
-    this.snackbar.open("password and confirm password do not match")
-  }else{
+  
  this.snackbar.open('Submitted successfully', "OK", { duration: 3000 });
   this.router.navigate(['Login'])
-  }
+ 
  
 }
 
