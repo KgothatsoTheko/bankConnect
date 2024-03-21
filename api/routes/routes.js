@@ -11,7 +11,7 @@ const multer = require('multer');
     const leadController = require('../controllers/leadController');
     router.get('/', leadController.defaultRoute);
     router.post('/leads', leadController.addLead);
-    router.post('/upload', upload.any(), leadController.uploadFile);
+    // router.post('/upload', upload.any(), leadController.uploadFile);
     router.get('/get-lead', leadController.getLead)
     router.post('/update-lead/:leadName', leadController.updateLead)
     router.delete('/leads/:email', leadController.deleteLead)
@@ -30,7 +30,7 @@ const multer = require('multer');
     router.post('/customers', customerController.addCustomer);
     router.get('/get-customer', customerController.getCustomer)
     router.post('/update-customer/:email', customerController.updateCustomer)
-    router.delete('/delete-lead/:email', customerController.deleteCustomer)
+    router.delete('/delete-customer/:email', customerController.deleteCustomer)
 
     // Auth Routes
     const authController = require('../controllers/authController');
@@ -40,21 +40,19 @@ const multer = require('multer');
     router.post('/LogIn', authController.loginRoute)
 
 
-    // Role routes
-    const roleController = require('../controllers/roleController')
-    // Create an new Role
-    router.post('/create', roleController.createRole)
-    // Update role in DB
-    router.put('/update/:id', roleController.updateRole )
-    // Get all roles from db
-    router.get('/getAll', roleController.getAllRoles )
-    // delete role from db
-    router.delete('/delete/:id', roleController.deleteRole )
+    
     
     // Add Report routes
     const reportController = require('../controllers/reportController');
     router.get('/', reportController.defaultRoute);
     router.post('/reports', reportController.addReport);
     router.get('/get-report', reportController.getReport);
+
+    // Add Transaction routes
+    const transactionController = require('../controllers/transactionsController');
+    router.get('/', transactionController.defaultRoute);
+    router.post('/add-airtime', transactionController.addAirtime);
+    router.post('/add-electricity', transactionController.addElectricity);
+    router.post('/feedback', transactionController.addFeedback);
 
 module.exports = router;
