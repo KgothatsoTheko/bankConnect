@@ -1,0 +1,28 @@
+.margin-b {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: end;
+    justify-content: end;
+}
+
+.width {
+    width: 99%;
+}
+
+p {
+    margin-top: 30px;
+}
+
+.mat-mdc-unelevated-button.mat-primary {
+    background-color: #ff9f68 !important;
+}
+
+tr th {
+    background-color: rgba(236, 234, 234, 0.643);
+}
+
+.table {
+    width: 100%;
+    border: 3px solid orange;
+    border-radius: 7px;
+}

@@ -36,6 +36,9 @@ import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { SliderComponent } from './sharedComponents/slider/slider.component';
 import { WelcomeMessageComponent } from './welcome-message/welcome-message.component';
 import { AdminRegisterComponent } from './forms/admin-register/admin-register.component';
+import { CustomerBarComponent } from './charts/customer-bar/customer-bar.component';
+import { CustomerTableComponent } from './tables/customer-tables/customer-table.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,6 +66,8 @@ import { AdminRegisterComponent } from './forms/admin-register/admin-register.co
     SliderComponent,
     WelcomeMessageComponent,
     AdminRegisterComponent,
+    CustomerBarComponent,
+    CustomerTableComponent
   ],
   imports: [
     BrowserModule,

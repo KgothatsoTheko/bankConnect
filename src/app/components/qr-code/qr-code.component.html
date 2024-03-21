@@ -6,10 +6,9 @@
 
     <div *ngIf="isQR">
         <h2>Your QR code is <span>Ready!</span> </h2>
-        <h5 *ngIf="istext">Take a photo of the QR code to scan and login <br><br>
+        <h5> <br>
             Click <a [href]="qrCodeDownloadLink" download="qrcode"> <span>here</span> </a>
             to <b>Download</b> the QR code and use it next time you login. <br><br>
-            Check your profile if you need it again.
         </h5>
     </div>
 </div>
