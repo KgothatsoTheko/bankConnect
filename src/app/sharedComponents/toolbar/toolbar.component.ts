@@ -7,9 +7,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent implements OnInit {
+  isLogo: boolean = true
   isLoading: boolean = false;
   isToolbarEnabled: boolean = true; 
-  constructor(private router:Router){}
+  constructor(private router:Router){
+    this.disableLogoQrCodeRoute()
+  }
   menuItems: any =[
     
    {label:'profile', route:'/dashboard/profile'},
@@ -23,6 +26,16 @@ export class ToolbarComponent implements OnInit {
 
   ngOnInit() {
     this.disableToolbarIfQrCodeRoute();
+    this.disableLogoQrCodeRoute()
+  }
+
+  disableLogoQrCodeRoute() {
+    const currentRoute = this.router.url;
+    if (currentRoute === '/dashboard/home') {
+      this.isLogo = false;
+    } else {
+      this.isLogo = true;
+    }
   }
 
   disableToolbarIfQrCodeRoute() {

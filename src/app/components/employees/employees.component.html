@@ -1,58 +1,71 @@
 <div class="main-container gap-1em full-width">
 
-        <div class="mini-container gap-1em flex">
-            <div class="profile-pic flex center-center flex">
-                <img src="../../../assets/images/svgProfile-pic.png" height="100%" width="100%" alt="">
+    <div class="mini-container gap-1em flex">
+        <div class="profile-pic flex center-center flex">
+            <img src="../../../assets/images/svgProfile-pic.png" height="100%" width="100%" alt="">
+        </div>
+        <div class="flex infor column ">
+            <h3>
+                Name: {{user.name}}
+            </h3>
+            <h3>
+                Surname: {{user.surname}}
+            </h3>
+            <h3>
+                Email: <small>{{user.email}}</small>
+            </h3>
+            <h3>
+                ID: {{user.ID}}
+            </h3>
+        </div>
+    </div>
+
+    <div class="mini-container full-width gap-1em">
+<mat-card class="full-width">
+    <img src="../../../assets/images/calendar-2024-printable.png" width="100%" height="100%" alt="">
+</mat-card>
+    </div>
+
+    <div class="mini-container qrCode">
+        <app-qr-code></app-qr-code>
+    </div>
+
+    <div class="mini-containerr box half-width flex column gap-1em">
+        <div class="flex box">
+            
+            <div class="half-width box box-left">
+                <a class="box" href="https://login.microsoftonline.com/common/oauth2/authorize?client_id=00000002-0000-0ff1-ce00-00000000
+                0000&redirect_uri=https%3a%2f%2foutlook.office.com%2fowa%2f&resource=00000002-0000-0ff1-ce00-000000000000&response_mode=form_post&response_type=code+id_token&scope=openid&msaf
+                ed=1&msaredir=1&client-request-id=86078293-1df1-464f-35df-5e5f4bcdea7c&protectedtoken=true&claims=%7b%22id_token%22%3a%7b%22xms_cc%22%3a%7b%22values%22%3a%5b%22CP1%22%5d%7d%
+                7d%7d&nonce=638466733704123955.146a2015-e469-4c17-96bc-a0ceb0e9bfd7&state=DYvLroIwFABB_4Vd5RRK61kQEzVeTWSDCsrGtKXGV_UG6uP-_e1iZlYTBkEw9Aw8IXgFgqdjxrlIUwGMJilm2YgyLhOgGTGMI2GaCoJ
+                caSJBGwUG1akVoX8_8fMj48nrkpsH2W2irs9_ppF8uXNOo95JZ3w70
+                146o932mctlCXpZ8PUfvtt92asEu7VF29j7tdlkV5XAW9WLXzUbH9v6hk3NXFUVVj8KLGFlD_sK5By-_w" target="_blank">
+                <img class="box" src="../../../assets/images/Microsoft_Office_Outlook_(2018–present).svg.webp" width="35%" alt="">
+            </a>
             </div>
-            <div class="flex infor column ">
-                <h3>
-                    Name: {{user.name}}
-                </h3>
-                <h3>
-                   Surname: {{user.surname}}
-                </h3>
-                <h3>
-                    Email: <small>{{user.email}}</small>
-                </h3>
-                <h3>
-                    ID: {{user.ID}}
-                </h3>
+
+            
+            <div class="half-width box box-right">
+                <a  class="box" href="https://support.google.com/mail/answer/56256?hl=en" target="_blank">
+                <img class="box" src="../../../assets/images/Gmail_icon_(2020).svg.png" width="35%" alt="">
+                </a>
             </div>
         </div>
 
-
-        <div class="mini-container flex gap-1em">
-            <div class="date half-width full-height">
-                <mat-card class="Calendar full-height flex center-center">
-                     <h2>
-                        Calendar
-                     </h2>
-                </mat-card>
-               
+        
+        <div class="flex box center-center box-left">
+            <div class="half-width ">
+                <a  class="box" href="https://docs.google.com/spreadsheets/d/1pmL7lTNtPxlPn3xFLh_OZvpaLrmSezTDmOrNmXIpYxY/edit#gid=0" 
+                target="_blank">
+                <img class="box" src="../../../assets/images/excel-4.svg" width="35%" alt=""></a>
             </div>
 
-            <div class="events half-width full-height">
-
-                <mat-card class="Calendar full-height flex center-center">
-                    <h2>
-                       up-coming events...
-                    </h2>
-               </mat-card>
-
+            
+            <div class="half-width box flex box-right">
+                <a  class="box" href="https://docs.google.com/document/u/0/?ec=asw-docs-hero-goto" target="_blank">
+                <img  class="box"src="../../../assets/images/ms-word.svg.png" width="35%" alt="">
+                </a>
             </div>
         </div>
-
-
-        <div class="mini-container qrCode">
-            <app-qr-code></app-qr-code>
-        </div>
-
-        <div class="mini-container flex center-center"> 
-            <div class="pie">
-                <mat-card>
-                    <!-- <app-tasks-doughnut></app-tasks-doughnut> -->
-                </mat-card>
-            </div> 
-        </div>
-
+    </div>
 </div>

@@ -12,11 +12,8 @@
         </mat-form-field>
 
         <mat-form-field appearance="fill">
-            <mat-label>Owner</mat-label>
-            <input type="text" matInput formControlName="owner" required>
-            <mat-error *ngIf="addTaskForm.get('owner')?.hasError('required')">
-                owner is required
-            </mat-error>
+            <mat-label>Admin Name</mat-label>
+            <input type="text" matInput formControlName="owner">
         </mat-form-field>
 
         <mat-form-field appearance="fill">
@@ -93,7 +90,7 @@
 
         <div class="flex center-center gap-1em">
             <div><button mat-raised-button class="btn-cancel" (click)="cancel()">Cancel</button></div>
-            <div><button mat-raised-button class="btn-submit" (click)=" submit()">Submit</button></div>
+            <div><button mat-raised-button class="btn-submit" (click)=" submit()" [disabled] = "addTaskForm.invalid">Submit</button></div>
         </div>
     </form>
 </mat-card>

@@ -13,7 +13,7 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./leads.component.scss']
 })
 export class LeadsComponent {
-  displayedColumns: string[] = ['name', 'surname', 'gender', 'ID', 'actions'];
+  displayedColumns: string[] = ['name', 'surname','age', 'gender','contact' , 'ID', 'actions'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -30,7 +30,6 @@ export class LeadsComponent {
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-      
       },
       error: (error: any) => {
         console.error('Error:', error);
@@ -42,6 +41,15 @@ export class LeadsComponent {
     const dialogRef = this.dialog.open(RegisterLeadComponent, { 
       data: { ...row, action: 'Edit' } 
     });
+    dialogRef.componentInstance.leadUpdated.subscribe((updatedLead: any) => {
+      const index = this.dataSource.data.findIndex((lead: any) => lead.name === updatedLead.name);
+
+      if (index !== -1) {
+        this.dataSource.data[index] = updatedLead;
+        this.dataSource._updateChangeSubscription();
+      }
+    });
+  
     dialogRef.afterClosed().subscribe(result => { 
       if (!result) {
         this.snackbar.open('Update was closed', 'Ok', { duration: 3000 });
