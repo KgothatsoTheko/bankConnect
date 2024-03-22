@@ -28,7 +28,7 @@ export class CustomerComponent {
 
  
   getCustomers() {
-    this.api.genericGet("/get-lead").subscribe({
+    this.api.genericGet("/get-customer").subscribe({
       next:(res:any) =>{
         this.dataSource = new MatTableDataSource(res)
         this.dataSource.paginator = this.paginator;
@@ -60,10 +60,10 @@ export class CustomerComponent {
   }
 
   update(row:any){
-    const updatedLead = this.displayedColumns; 
+    const updatedCustomer = this.displayedColumns; 
     const leadId = row._id; 
 
-    this.api.genericPost('/leads', updatedLead).subscribe({
+    this.api.genericPost('/get-customer', updatedCustomer).subscribe({
       next: (res: any) => {
         console.log(res);
       },
@@ -72,12 +72,27 @@ export class CustomerComponent {
     });
   }
 
-    delete(index: number){
-      console.log(index)
-      // let allCustomers =  this.getCustomers();
-      // console.log('customers', allCustomers)
-      // let tt = this.getCustomers().splice(index, 1)
+    // delete(index: number){
+    //   console.log(index)
+    //   // let allCustomers =  this.getCustomers();
+    //   // console.log('customers', allCustomers)
+    //   // let tt = this.getCustomers().splice(index, 1)
   
+    // }
+
+    delete(row: any) {
+      const email = row.email; 
+      this.api.genericDelete(`/leads/${email}`).subscribe({
+        next: (res: any) => {
+          console.log('Lead deleted successfully:', res);
+          this. getCustomers();
+          this.snackbar.open('Customer deleted successfully', 'Ok', { duration: 3000 });
+        },
+        error: (error: any) => {
+          console.error('Error deleting lead:', error);
+          this.snackbar.open('Error deleting customer', 'Ok', { duration: 3000 });
+        }
+      });
     }
 
   applyFilter(event: Event) {

@@ -89,7 +89,7 @@
                       <td mat-cell *matCellDef="let row"> 
                         <div class="flex gap-05">
                           <img (click)="edit(row)" src="../../../assets/action/iconamoon--edit-light.svg" width="20px" height="30px"> 
-                          <img  src="../../../assets/action/delete.svg" width="20px" height="30px"> 
+                          <img (click)="delete(row)" src="../../../assets/action/delete.svg" width="20px" height="30px"> 
                         </div>
                       </td>
                     </ng-container>
