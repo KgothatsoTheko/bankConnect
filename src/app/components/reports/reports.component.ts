@@ -10,32 +10,40 @@ import * as XLSX from 'xlsx';
 })
 
 export class ReportsComponent implements AfterViewInit {
-  dataSource: any;
+  dataCustomers: any;
+  dataEmployee:any;
   currentDate: Date = new Date();
   fileName = 'ReportSheet.xlsx';
-  reports: any;
+
+  // reports: any;
   leads: any;
   tasks: any;
+  customers:any;
+
+  //Report Fields
+  customer:any;
+  contact :any ;
+  type : any;
+  date :any ;
+  employee:any;
+  outcome:any;
+  reports:any[]=[]
+
   displayedColumns: string[] = ['Customer', 'Contact', 'Interactions Type', 'Date & Time', 'Employee', 'Outcome'];
   isLeftDisabled: boolean = true;
   isRightDisabled: boolean = false;
-  customerName: any;
+
 
   @ViewChild('content') content!: ElementRef;
   leadsCount: any = 0;
   rejectCount: any = 0;
   approvedCount: any = 0;
 
-  allUsers: any[] = [];
-  newUsers: any[] = []
   constructor(private api: ApiService, private snackBar: MatSnackBar, private cd: ChangeDetectorRef) {
     this.getLeads();
     this.getReports();
     this.getTasks();
-
-    this.allUsers.forEach((ele: any) => {
-      console.log(this.allUsers)
-    })
+    this.getCustomers();
   }
 
   ngAfterViewInit() {
@@ -87,9 +95,11 @@ export class ReportsComponent implements AfterViewInit {
     this.api.genericGet('/get-lead').subscribe({
       next: (res: any) => {
         this.leads = res
+        this.reports.push(res)
+        console.log("reports 3", this.reports)
+        console.log("Leads",this.leads)
         this.leads.forEach((ele: any) => {
           this.leadsCount = this.leadsCount + 1
-          // console.log(ele.status)
           if (ele.outcome === 'completed') {
             this.approvedCount = this.approvedCount + 1
           } else {
@@ -97,7 +107,6 @@ export class ReportsComponent implements AfterViewInit {
           }
 
         });
-        this.allUsers.push(res)
       },
       error: (error: any) => {
         console.error('Error:', error);
@@ -109,23 +118,30 @@ export class ReportsComponent implements AfterViewInit {
       .subscribe({
         next: (res: any) => {
           this.reports = res
-          console.log(res)
-          this.dataSource = this.reports;
-          this.allUsers.push(res)
-          // console.log(this.allUsers)
+          console.log("Reports",res)
         },
         error: (err: any) => this.snackBar.open(err, 'Ok', { duration: 3000 }),
         complete: () => { }
       })
   }
+  getCustomers(){
+    this.api.genericGet('/get-customer').subscribe({
+      next:(res:any) => {
+        this.customers = res
+        this.reports.push(res)
+        console.log("reports 1", this.reports)
+        this.dataCustomers =  this.customers 
+        console.log("Customers",this.dataCustomers)
+       
+      }
+    })
+  }
   getTasks() {
     this.api.genericGet('/get-task').subscribe({
       next: (res: any) => {
         this.tasks = res;
-
-        this.allUsers.push(res)
-        console.log(this.allUsers)
-
+        this.dataEmployee = this.tasks;
+        console.log("Tasks",this.tasks)
       },
       error: (error: any) => {
         console.error('Error:', error);

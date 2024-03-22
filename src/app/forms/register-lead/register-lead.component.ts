@@ -22,6 +22,7 @@ export class RegisterLeadComponent {
   citizen:any;
   isUpdate: boolean = false;
   qrCodeData: string = '';
+  
 
 
 registerForm: FormGroup
@@ -83,6 +84,7 @@ submit(){
   this.api.genericPost('/leads', formValue).subscribe({
     next: (res: any) => {
       console.log(res);
+
       sessionStorage.setItem('qr-user', JSON.stringify(res));
     },
     error: (err: any) => console.log("error", err),
