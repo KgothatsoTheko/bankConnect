@@ -34,7 +34,7 @@
                         <input matInput type="number" minlength="2" formControlName="age" [value]="age"
                             placeholder="26">
                         <mat-error *ngIf="registerForm.get('age')?.hasError('required')">
-                            description is required
+                            Age is required
                         </mat-error>
                     </mat-form-field>
                 </div>

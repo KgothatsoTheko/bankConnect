@@ -1,8 +1,7 @@
-import { Component, Inject } from '@angular/core';
+import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -11,120 +10,127 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./register-lead.component.scss']
 })
 export class RegisterLeadComponent {
-  DOB!:string;
-  ID:any;
-  Date:any;
+  @Output() leadAdded = new EventEmitter<any>();
+  @Output() leadUpdated = new EventEmitter<any>();
+  DOB!: string;
+  ID: any;
+  Date: any;
   year!: any;
   month!: string;
   day!: string;
-  gender:any;
-  age:any;
-  citizen:any;
+  gender: any;
+  age: any;
+  citizen: any;
   isUpdate: boolean = false;
-  qrCodeData: string = '';
+  isEdit: boolean = false;
 
+  registerForm: FormGroup;
 
-registerForm: FormGroup
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private matDialogRef: MatDialogRef<RegisterLeadComponent>,
+    private fb: FormBuilder, private snackbar: MatSnackBar, private api: ApiService) {
+    this.registerForm = this.fb.group({
+      name: ['', Validators.required],
+      surname: ['', Validators.required],
+      DOB: ['', Validators.required],
+      age: ['', Validators.required],
+      ID: ['', [Validators.required, Validators.minLength(13), Validators.maxLength(13)]],
+      email: [''],
+      citizenship: ['', Validators.required],
+      gender: ['', Validators.required],
+      Source: ['', Validators.required],
+      contact: ['']
+    });
 
-constructor(@Inject(MAT_DIALOG_DATA) public data:any,private matDialogRef: MatDialogRef<RegisterLeadComponent>,
-   private fb:FormBuilder, private snackbar:MatSnackBar, private api:ApiService, private router:Router){
-  this.registerForm = new FormGroup({
-    name: new FormControl('',[Validators.required]),
-    surname: new FormControl('',[Validators.required]),
-    DOB: new FormControl(this.year+this.month+this.day,[Validators.required]),
-    age: new FormControl(this.age,[Validators.required]),
-    ID: new FormControl('',[Validators.required, Validators.minLength(13), Validators.maxLength(13)]),
-    email: new FormControl(''),
-    citizenship: new FormControl(this.citizen,[Validators.required]),
-    gender: new FormControl(this.gender,Validators.required),
-    reference: new FormControl('',[Validators.required]),
-    contact: new FormControl('')
-  })
-this.Date = new Date().getFullYear()
+    this.Date = new Date().getFullYear();
 
-if (data) {
-  this.isUpdate = true;
-  this.isEdit = true;
-  this.registerForm.patchValue(data)
-}
+    if (data) {
+      this.isEdit = true; // Set isEdit to true for update operation
+      this.registerForm.patchValue(data);
+    }
+    this.registerForm.patchValue(data);
+  }
+  
 
-}
-isEdit: boolean = false;
+  IdValid() {
+    this.DOB = this.registerForm.controls['ID'].value.toString();
+    this.year = "19" + this.DOB.slice(0, 2);
+    this.month = this.DOB.slice(2, 4);
+    this.day = this.DOB.slice(4, 6);
 
-IdValid() {
-   this.DOB = this.registerForm.controls['ID'].value.toString(); 
-  console.log(this.DOB);
-  this.year = "19" + this.DOB.slice(0, 2);
-  console.log(this.year)
-  this.month = this.DOB.slice(2, 4);
-  this.day = this.DOB.slice(4, 6);
- 
-  this.citizenship()
-  this.genders()
-  this.age = this.ageCalc()
+    this.citizenship();
+    this.genders();
+    this.age = this.ageCalc();
 
-  this.registerForm.patchValue({
-    DOB: this.year + this.month + this.day,
-    age: this.age,
-    gender: this.gender,
-    citizenship: this.citizen
-  });
-}
-
-submit(){
-  console.log(this.registerForm.value)
-  let formValue = this.registerForm.value;
-
-  if (this.registerForm.invalid) {
-    this.snackbar.open("fill in fields", "OK", { duration: 3000 })
-    return
+    this.registerForm.patchValue({
+      DOB: this.year + this.month + this.day,
+      age: this.age,
+      gender: this.gender,
+      citizenship: this.citizen
+    });
   }
 
-  this.api.genericPost('/leads', formValue).subscribe({
-    next: (res: any) => {
-      console.log(res);
-      sessionStorage.setItem('qr-user', JSON.stringify(res));
-    },
-    error: (err: any) => console.log("error", err),
-    complete: () => { }
-  });
-  this.snackbar.open('Submitted successfully', "OK", { duration: 3000 });
-  this.matDialogRef.close()
-}
-
-cancel(){
-  this.matDialogRef.close()
-}
-
-genders(){
-  this.gender;
-  if (parseInt(this.DOB.charAt(6), 10) >= 5) {
-    this.gender = "male";
-  } else {
-    this.gender = 'female';
+  submit() {
+    const formValue = this.registerForm.value;
+  
+    // Check form validity and perform other validations
+  
+    if (this.isEdit) {
+      // Update existing lead
+      this.api.genericPost('/update-lead/' + this.data.name, formValue).subscribe({
+        next: (res: any) => {
+          console.log(res);
+          this.leadUpdated.emit(res);
+          this.matDialogRef.close();
+          this.snackbar.open('Lead updated successfully', 'OK', { duration: 3000 });
+        },
+        error: (err: any) => {
+          console.log("error", err);
+          this.snackbar.open('Error updating lead', 'OK', { duration: 3000 });
+        }
+      });
+    } else {
+      this.api.genericPost('/leads', formValue).subscribe({
+        next: (res: any) => {
+          console.log(res);
+          this.matDialogRef.close({ leads: res })
+          this.leadAdded.emit(res); 
+          this.matDialogRef.close();
+          this.snackbar.open('Lead added successfully', 'OK', { duration: 3000 });
+        },
+        error: (err: any) => {
+          console.log("error", err);
+          this.snackbar.open('Error adding lead', 'OK', { duration: 3000 });
+        }
+      });
+    }
   }
-}
+  
 
-citizenship(){
-  let C = this.DOB.slice(10, 11);
-  this.citizen;
-  if (C === "0") {
-    this.citizen = "South African";
-  } else {
-    this.citizen = "not South African";
-  }
-}
-
-ageCalc(){
-     let answer =  new Date().getFullYear() - this.year
-     return answer
-}
-
-generateQRCode() {
-  const dataFromStorage = sessionStorage.getItem('qr-user');
-  if (dataFromStorage) {
-    this.qrCodeData = dataFromStorage;
+  cancel() {
+    this.matDialogRef.close();
   }
 
-}
+  genders() {
+    this.gender;
+    if (parseInt(this.DOB.charAt(6), 10) >= 5) {
+      this.gender = "male";
+    } else {
+      this.gender = 'female';
+    }
+  }
+
+  citizenship() {
+    let C = this.DOB.slice(10, 11);
+    this.citizen;
+    if (C === "0") {
+      this.citizen = "South African";
+    } else {
+      this.citizen = "not South African";
+    }
+  }
+
+  ageCalc() {
+    let answer = new Date().getFullYear() - this.year;
+    return answer;
+  }
 }
