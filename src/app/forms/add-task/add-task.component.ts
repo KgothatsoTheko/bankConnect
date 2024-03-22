@@ -23,8 +23,8 @@ export class AddTaskComponent {
       owner: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
       date: new FormControl('', Validators.required),
-      startTime: new FormControl(this.defaultStartTime, Validators.required),
-      endTime: new FormControl(this.defaultEndTime, Validators.required),
+      startTime: new FormControl('', Validators.required),
+      endTime: new FormControl('', Validators.required),
       status: new FormControl('', Validators.required),
       taskType: new FormControl('', Validators.required)
     }, { validators: this.timeValidator as ValidatorFn });
@@ -35,7 +35,10 @@ export class AddTaskComponent {
     }
    
     this.minDate = new Date();
+    this.user = this.api.get('qr-user', 'session')
   }
+
+  user:any ;
 
   timeValidator(form: FormGroup) {
     const startTimeControl = form.get('startTime');
@@ -62,19 +65,21 @@ export class AddTaskComponent {
 
   submit() {
     let formValue = this.addTaskForm.value;
-
+    console.log('Off')
+  
     if (this.addTaskForm.invalid) {
-      this.snackbar.open("fill in fields", "OK", { duration: 3000 })
-      return
+      this.snackbar.open("Fill in all fields", "OK", { duration: 3000 });
+      return;
     }
-
+  
     this.api.genericPost('/tasks', formValue).subscribe({
       next: (res: any) => {
+        this.snackbar.open('Submitted successfully', "OK", { duration: 3000 });
+        this.matDialogRef.close({ task: res });
       },
-      error: (err: any) => console.log("error", err),
-      complete: () => { }
+      error: (err: any) => {
+        console.error("Error", err);
+      }
     });
-    this.matDialogRef.close()
-    this.snackbar.open('Submitted successfully', "OK", { duration: 3000 });
   }
 }

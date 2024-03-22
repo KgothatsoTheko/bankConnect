@@ -9,9 +9,30 @@
 .mini-container{
 width: 47%;
 height: 47%;
-// background-color: aqua;
+justify-content: end;
 }
 
+.mini-containerr{
+    width: 47%;
+    height: 47%;
+    justify-content: end;
+    align-items: end;
+    }
+
+img{
+    margin-right: 1em;
+
+}
+
+
+
+.red{
+    background-color: red($color: #000000);
+}
+
+.center{
+    margin-left: 1em;
+}
 
 //image
 .profile-pic{
@@ -44,4 +65,18 @@ height: 47%;
     display: flex;
     justify-content: end;
     align-items: end;
+}
+
+mat-card{
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    border: 1px gray solid;
+    box-shadow: 3px 2px black;
+}
+
+.box{
+    justify-content: end;
+    align-items: end;
+    display: flex;
 }

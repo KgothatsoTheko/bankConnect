@@ -12,7 +12,7 @@
                 <input matInput type="text" formControlName="ID" placeholder="9801115169080" required
                     (blur)="IdValid()">
                     <mat-error *ngIf="registerForm.get('ID')?.hasError('required')">
-                        description is required
+                        ID is required
                     </mat-error>
             </mat-form-field>
 
@@ -94,13 +94,12 @@
                         Contact is more than 10 digits
                     </mat-error>
                 </mat-form-field>
-                
             </div>
 
             <mat-form-field appearance="fill" class="lets">
-                <mat-label>reference</mat-label>
-                <input matInput type="text" minlength="10" formControlName="reference" required>
-                <mat-error *ngIf="registerForm.get('reference')?.hasError('required')">
+                <mat-label>Source</mat-label>
+                <input matInput type="text" formControlName="Source" required>
+                <mat-error *ngIf="registerForm.get('Source')?.hasError('required')">
                     reference is required
                 </mat-error>
             </mat-form-field>
@@ -112,4 +111,3 @@
         </form>
     </mat-card>
 </div>
-<app-qr-code [qrData]="qrCodeData" hidden></app-qr-code>
