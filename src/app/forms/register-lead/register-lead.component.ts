@@ -49,6 +49,14 @@ export class RegisterLeadComponent {
     }
     this.registerForm.patchValue(data);
   }
+
+  getLeads(){
+    this.api.genericGet('/get-lead').subscribe({
+      next: (res:any) => {
+
+      }
+    })
+  }
   
 
   IdValid() {
@@ -72,14 +80,17 @@ export class RegisterLeadComponent {
   submit() {
     const formValue = this.registerForm.value;
   
-    // Check form validity and perform other validations
+    if (this.registerForm.invalid) {
+      this.snackbar.open("Fill in all fields", "OK", { duration: 3000 });
+      return;
+    }
   
     if (this.isEdit) {
-      // Update existing lead
       this.api.genericPost('/update-lead/' + this.data.name, formValue).subscribe({
         next: (res: any) => {
           console.log(res);
           this.leadUpdated.emit(res);
+          this.getLeads()
           this.matDialogRef.close();
           this.snackbar.open('Lead updated successfully', 'OK', { duration: 3000 });
         },

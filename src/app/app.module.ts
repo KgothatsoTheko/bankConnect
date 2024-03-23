@@ -38,6 +38,7 @@ import { WelcomeMessageComponent } from './welcome-message/welcome-message.compo
 import { AdminRegisterComponent } from './forms/admin-register/admin-register.component';
 import { CustomerBarComponent } from './charts/customer-bar/customer-bar.component';
 import { CustomerTableComponent } from './tables/customer-tables/customer-table.component';
+import { DeleteComponent } from './popUp/delete/delete.component';
 import { CustomerEditComponent } from './components/customer-edit/customer-edit.component';
 
 @NgModule({
@@ -69,6 +70,7 @@ import { CustomerEditComponent } from './components/customer-edit/customer-edit.
     AdminRegisterComponent,
     CustomerBarComponent,
     CustomerTableComponent,
+    DeleteComponent,
     CustomerEditComponent
   ],
   imports: [

@@ -30,8 +30,6 @@ export class TasksComponent  {
 
   selectDisabled: boolean = false;
 
-  
-
   openBottomSheet(): void {
     this._bottomSheet.open(SheetsComponent);
   }
