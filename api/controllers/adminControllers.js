@@ -2,6 +2,8 @@ const admin = require('../models/admin');
 const File = require('../models/file');
 const { Readable } = require("stream")
 const mongoose = require("mongoose")
+// hash the password
+const bcrypt = require('bcrypt')
 
 let bucket;
 mongoose.connection.on("open", () => {
@@ -23,6 +25,9 @@ module.exports = {
         try {
             const payload = { ...req.body };
             payload['fileId'] = pictureId;
+            const salt = await bcrypt.genSalt(10)
+            const hashPassword = await bcrypt.hash(req.body.password, salt)
+            payload.password = hashPassword
             const newAdmin = new admin(payload)
             const result = await newAdmin.save()
             res.status(201).send(result)
