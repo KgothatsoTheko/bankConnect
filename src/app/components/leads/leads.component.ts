@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { RegisterLeadComponent } from 'src/app/forms/register-lead/register-lead.component';
+import { DeleteComponent } from 'src/app/popUp/delete/delete.component';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -20,7 +21,8 @@ export class LeadsComponent {
 
   dataSource!: MatTableDataSource<any>;
 
-  constructor(private dialog: MatDialog, private api: ApiService, private snackbar: MatSnackBar) {
+  constructor(private dialog: MatDialog, private api: ApiService,
+     private snackbar: MatSnackBar,) {
     this.getLeads();
   }
 
@@ -77,11 +79,25 @@ export class LeadsComponent {
   }
 
   delete(row: any) {
+    const dialogRef = this.dialog.open(DeleteComponent, {
+      width: '55vw',
+      maxWidth: '100vw',
+      height: '30vh'
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.deleteRow(row);
+      }
+    });
+  }
+  
+  deleteRow(row: any) {
     const email = row.email; 
     this.api.genericDelete(`/leads/${email}`).subscribe({
       next: (res: any) => {
         console.log('Lead deleted successfully:', res);
-        this.getLeads();
+        this.getLeads(); // Refresh the table
         this.snackbar.open('Lead deleted successfully', 'Ok', { duration: 3000 });
       },
       error: (error: any) => {
