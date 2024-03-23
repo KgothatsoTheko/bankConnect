@@ -1,0 +1,82 @@
+<div class="main-container">
+  
+    <mat-card>
+        <form class="flex column" [formGroup]="registerForm">
+            <div class="flex center-center">
+                <h2>
+                    {{isEdit ? 'Edit Customer Details': 'Add Lead'}}
+                </h2>
+            </div>
+
+            <div class="flex gap-1em">
+               
+                <mat-form-field appearance="fill">
+                    <mat-label>ID</mat-label>
+                    <input matInput type="text" formControlName="ID" placeholder="9801115169080" required
+                       >
+                        <mat-error *ngIf="registerForm.get('ID')?.hasError('required')">
+                            ID is required
+                        </mat-error>
+                </mat-form-field>                
+
+                <mat-form-field appearance="fill">
+                    <mat-label>gender</mat-label>
+                    <input type="text" matInput formControlName="gender" placeholder="nicholasmaluleka@gmail.com"
+                        [value]="gender">
+                        <mat-error *ngIf="registerForm.get('gender')?.hasError('required')">
+                            description is required
+                        </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="flex gap-1em">
+                <mat-form-field appearance="fill">
+                    <mat-label>name</mat-label>
+                    <input type="text" matInput formControlName="name" placeholder="nicholas" required>
+                    <mat-error *ngIf="registerForm.get('name')?.hasError('required')">
+                        description is required
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>surname</mat-label>
+                    <input type="text" matInput formControlName="surname" placeholder="nicholas" required>
+                    <mat-error *ngIf="registerForm.get('surname')?.hasError('required')">
+                        description is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="flex gap-1em">
+                <mat-form-field appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput formControlName="email" placeholder="nicholasmaluleka@gmail.com">
+                    <mat-error *ngIf="registerForm.get('email')?.hasError('required')">
+                        email is required
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Contact</mat-label>
+                    <input type="text" minlength="10" maxlength="10" matInput formControlName="contact" placeholder="0796682774" required>
+                    <mat-error *ngIf="registerForm.get('contact')?.hasError('required')">
+                        Contact is required
+                    </mat-error>
+                    <mat-error *ngIf="registerForm.get('contact')?.hasError('minlength')">
+                        Contact is less than 10 digits
+                    </mat-error>
+                    <mat-error *ngIf="registerForm.get('contact')?.hasError('maxlength')">
+                        Contact is more than 10 digits
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+         
+
+            <div class="flex center-center gap-1em">
+                <div><button mat-raised-button class="btn-cancel" (click)="cancel()">Cancel</button></div>
+                <div><button mat-raised-button class="btn-submit" (click)="submit()">{{isEdit ? 'Edit': 'Submit'}}</button></div>
+            </div>
+        </form>
+    </mat-card>
+</div>

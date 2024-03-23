@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { RegisterLeadComponent } from 'src/app/forms/register-lead/register-lead.component';
 import { ApiService } from 'src/app/services/api.service';
 import * as XLSX from 'xlsx';
+import { CustomerEditComponent } from '../customer-edit/customer-edit.component';
 
 
 @Component({
@@ -16,7 +17,7 @@ import * as XLSX from 'xlsx';
 })
 export class CustomerComponent {
 
-  displayedColumns: string[] = ['name', 'surname', 'ID', 'email', 'gender','contact', 'citizenship','action'];
+  displayedColumns: string[] = ['name', 'surname', 'ID', 'email', 'gender','contact','action'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -44,19 +45,25 @@ export class CustomerComponent {
   isEdit!:boolean
 
   edit(row: any): void {
-    const action = this.isEdit ? 'Edit' : 'View Profile';
-  
-    const dialogRef = this.dialog.open(RegisterLeadComponent, { 
-      data: { ...row, action: action } 
+    const dialogRef = this.dialog.open(CustomerEditComponent, { 
+      data: { ...row, action: 'Edit' } 
     });
-    dialogRef.afterClosed().subscribe(result => { 
-      if (!result) {
-        this.snackbar.open('Update was closed', 'Ok', { duration: 3000 })
-      } else {
-        this.snackbar.open(result, 'Ok', { duration: 3000 })
+    dialogRef.componentInstance.customerUpdated.subscribe((updatedCustomer: any) => {
+      const index = this.dataSource.data.findIndex((customer: any) => customer.email === updatedCustomer.name);
+
+      if (index !== -1) {
+        this.dataSource.data[index] = updatedCustomer;
+        this.dataSource._updateChangeSubscription();
       }
     });
-    this.update(row)
+  
+    dialogRef.afterClosed().subscribe(result => { 
+      if (!result) {
+        this.snackbar.open('Update was closed', 'Ok', { duration: 3000 });
+      } else {
+        this.snackbar.open(result, 'Ok', { duration: 3000 });
+      }
+    });
   }
 
   update(row:any){
@@ -82,14 +89,12 @@ export class CustomerComponent {
 
     delete(row: any) {
       const email = row.email; 
-      this.api.genericDelete(`/leads/${email}`).subscribe({
+      this.api.genericDelete(`/delete-customer/${email}`).subscribe({
         next: (res: any) => {
-          console.log('Lead deleted successfully:', res);
           this. getCustomers();
           this.snackbar.open('Customer deleted successfully', 'Ok', { duration: 3000 });
         },
         error: (error: any) => {
-          console.error('Error deleting lead:', error);
           this.snackbar.open('Error deleting customer', 'Ok', { duration: 3000 });
         }
       });
