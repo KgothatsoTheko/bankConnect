@@ -39,6 +39,7 @@ import { AdminRegisterComponent } from './forms/admin-register/admin-register.co
 import { CustomerBarComponent } from './charts/customer-bar/customer-bar.component';
 import { CustomerTableComponent } from './tables/customer-tables/customer-table.component';
 import { DeleteComponent } from './popUp/delete/delete.component';
+import { CustomerEditComponent } from './components/customer-edit/customer-edit.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { DeleteComponent } from './popUp/delete/delete.component';
     AdminRegisterComponent,
     CustomerBarComponent,
     CustomerTableComponent,
-    DeleteComponent
+    DeleteComponent,
+    CustomerEditComponent
   ],
   imports: [
     BrowserModule,
