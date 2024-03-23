@@ -30,8 +30,6 @@ export class TasksComponent  {
 
   selectDisabled: boolean = false;
 
-  
-
   openBottomSheet(): void {
     this._bottomSheet.open(SheetsComponent);
   }
@@ -59,12 +57,19 @@ export class TasksComponent  {
   }
 
   addTask() {
-    this.matdialog.open(AddTaskComponent, {
+    const dialogRef = this.matdialog.open(AddTaskComponent, {
       width: '35vw',
       maxWidth: '50vw'
     });
+  
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result && result.task) {
+        // Append the new task to the existing data source
+        const newData = [...this.dataSource.data, result.task];
+        this.dataSource.data = newData;
+      }
+    });
   }
-
   
   check(row: any) {
     const updatedStatus = row.status; 

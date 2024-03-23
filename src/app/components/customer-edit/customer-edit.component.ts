@@ -2,16 +2,17 @@ import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { RegisterLeadComponent } from 'src/app/forms/register-lead/register-lead.component';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
-  selector: 'app-register-lead',
-  templateUrl: './register-lead.component.html',
-  styleUrls: ['./register-lead.component.scss']
+  selector: 'app-customer-edit',
+  templateUrl: './customer-edit.component.html',
+  styleUrls: ['./customer-edit.component.scss']
 })
-export class RegisterLeadComponent {
+export class CustomerEditComponent {
   @Output() leadAdded = new EventEmitter<any>();
-  @Output() leadUpdated = new EventEmitter<any>();
+  @Output() customerUpdated = new EventEmitter<any>();
   DOB!: string;
   ID: any;
   Date: any;
@@ -31,13 +32,9 @@ export class RegisterLeadComponent {
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
       surname: ['', Validators.required],
-      DOB: ['', Validators.required],
-      age: ['', Validators.required],
       ID: ['', [Validators.required, Validators.minLength(13), Validators.maxLength(13)]],
       email: [''],
-      citizenship: ['', Validators.required],
       gender: ['', Validators.required],
-      Source: ['', Validators.required],
       contact: ['']
     });
 
@@ -49,64 +46,53 @@ export class RegisterLeadComponent {
     }
     this.registerForm.patchValue(data);
   }
-
-  getLeads(){
-    this.api.genericGet('/get-lead').subscribe({
-      next: (res:any) => {
-
-      }
-    })
-  }
   
 
-  IdValid() {
-    this.DOB = this.registerForm.controls['ID'].value.toString();
-    this.year = "19" + this.DOB.slice(0, 2);
-    this.month = this.DOB.slice(2, 4);
-    this.day = this.DOB.slice(4, 6);
+  // IdValid() {
+  //   this.DOB = this.registerForm.controls['ID'].value.toString();
+  //   this.year = "19" + this.DOB.slice(0, 2);
+  //   this.month = this.DOB.slice(2, 4);
+  //   this.day = this.DOB.slice(4, 6);
 
-    this.citizenship();
-    this.genders();
-    this.age = this.ageCalc();
+  //   this.citizenship();
+  //   this.genders();
+  //   this.age = this.ageCalc();
 
-    this.registerForm.patchValue({
-      DOB: this.year + this.month + this.day,
-      age: this.age,
-      gender: this.gender,
-      citizenship: this.citizen
-    });
-  }
+  //   this.registerForm.patchValue({
+  //     DOB: this.year + this.month + this.day,
+  //     age: this.age,
+  //     gender: this.gender,
+  //     citizenship: this.citizen
+  //   });
+  // }
 
   submit() {
     const formValue = this.registerForm.value;
   
-    if (this.registerForm.invalid) {
-      this.snackbar.open("Fill in all fields", "OK", { duration: 3000 });
-      return;
-    }
+    // Check form validity and perform other validations
   
     if (this.isEdit) {
-      this.api.genericPost('/update-lead/' + this.data.name, formValue).subscribe({
+      // Update existing lead
+      this.api.genericPost('/update-customer/' + this.data.email, formValue).subscribe({
         next: (res: any) => {
           console.log(res);
-          this.leadUpdated.emit(res);
-          this.getLeads()
+          this.customerUpdated.emit(res);
           this.matDialogRef.close();
-          this.snackbar.open('Lead updated successfully', 'OK', { duration: 3000 });
+          this.snackbar.open('Customer updated successfully', 'OK', { duration: 3000 });
         },
         error: (err: any) => {
           console.log("error", err);
-          this.snackbar.open('Error updating lead', 'OK', { duration: 3000 });
+          this.snackbar.open('Error updating Customer', 'OK', { duration: 3000 });
         }
       });
     } else {
-      this.api.genericPost('/leads', formValue).subscribe({
+      this.api.genericPost('/customers', formValue).subscribe({
         next: (res: any) => {
           console.log(res);
-          this.matDialogRef.close({ leads: res })
+          this.matDialogRef.close({ customer: res })
           this.leadAdded.emit(res); 
           this.matDialogRef.close();
-          this.snackbar.open('Lead added successfully', 'OK', { duration: 3000 });
+          this.snackbar.open('Customer added successfully', 'OK', { duration: 3000 });
         },
         error: (err: any) => {
           console.log("error", err);

@@ -8,17 +8,13 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./bar.component.scss']
 })
 export class BarComponent {
-  
-  title = 'ng2-charts-demo';
-
   public barChartLegend = true;
   public barChartPlugins = [];
-
   public barChartData: ChartConfiguration<'bar'>['data'] = {
-    labels: ['Customers to Leads'],
+    labels: ['status bars'],
     datasets: [
-      { data: [], label: 'Customers', backgroundColor: 'orange' },
-      { data: [], label: 'Leads', backgroundColor: 'black' }
+      { data: [], label: 'Completed', backgroundColor: 'orange' },
+      { data: [], label: 'Pending', backgroundColor: 'black' }
     ]
   };
 
@@ -29,13 +25,13 @@ export class BarComponent {
   }
 
   fetchData() {
-    this.api.genericGet('/get-lead').subscribe({
+    this.api.genericGet('/get-task').subscribe({
       next: (res: any) => {
         const tasks = res; 
 
         const statusCount: { [key: string]: number } = {
-          'Customers': 0,
-          'Leads': 0
+          'completed': 0,
+          'pending': 0
         };
 
         tasks.forEach((task: any) => {
@@ -45,9 +41,10 @@ export class BarComponent {
           }
         });
 
-        this.barChartData.datasets[0].data.push(statusCount['Customers']);
-        this.barChartData.datasets[1].data.push(statusCount['Leads']);
+        this.barChartData.datasets[0].data.push(statusCount['completed']);
+        this.barChartData.datasets[1].data.push(statusCount['pending']);
       }
     });
   }
+  
 }

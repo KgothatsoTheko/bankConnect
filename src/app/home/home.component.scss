@@ -74,8 +74,22 @@ body{
 }
 
 //animations
+.fade-in {
+    opacity: 1;
+    animation: fadeIn 3s ease-in-out backwards;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+}
+
 .customer-lead{
-    animation-name: slideup;
+    // animation-name: slideup;
     animation-duration: 3s;
     animation-iteration-count: 1;
     animation-direction: alternate;
@@ -84,7 +98,7 @@ body{
 }
 
 .demograph{
-    animation-name: slideup;
+    // animation-name: slideup;
     animation-duration: 4s;
     animation-iteration-count: 1;
     animation-direction: alternate;

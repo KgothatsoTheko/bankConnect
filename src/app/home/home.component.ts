@@ -7,5 +7,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-constructor(private router:Router){}
+  isLogo: boolean = true
+constructor(private router:Router){
+  this.disableToolbarIfQrCodeRoute()
+}
+
+disableToolbarIfQrCodeRoute() {
+  const currentRoute = this.router.url;
+  if (currentRoute === '/dashboard/home') {
+    this.isLogo = false;
+  } else {
+    this.isLogo = true;
+  }
+}
 }

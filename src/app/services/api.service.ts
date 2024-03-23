@@ -31,4 +31,6 @@ export class ApiService {
     let data = sessionType === 'session' ? sessionStorage.getItem(key) : localStorage.getItem(key);
     return data ? JSON.parse(data) : data;
   }
+
+  
 }
