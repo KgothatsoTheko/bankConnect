@@ -2,31 +2,6 @@
   <div class="container">
     <h2 class="text-center">Reports:</h2>
     <div class="reports-table">
-      <!-- <table mat-table [dataSource]="dataCustomers" class="mat-elevation-z8" id="report-table">
-
-
-        Customer Column
-        <ng-container matColumnDef="Customer">
-          <th mat-header-cell *matHeaderCellDef>Customer </th>
-          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-        </ng-container>
-
-        Contact Column
-        <ng-container matColumnDef="Contact">
-          <th mat-header-cell *matHeaderCellDef> Contact</th>
-          <td mat-cell *matCellDef="let element"> {{element.contact.toString()}} </td>
-        </ng-container>
-
-        Interaction Type Column
-        <ng-container matColumnDef="Interactions Type">
-          <th mat-header-cell *matHeaderCellDef>Customer ID</th>
-          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-        </ng-container>
-
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
-      </table> -->
       <div class="reports-table">
         <mat-card class="content flex center-center" *ngFor="let card of record, let i = index">
             <img [src]="card.img" alt="">
@@ -41,96 +16,9 @@
     </div>
     <br>
     <br>
-    <div class="int-employee">
-      <p>Employees Interactions:</p>
-      <button mat-raised-button (click)="exportexcel('employee-table')">Export to Excel</button>
-    </div>
-    <div class="reports-table">
-      <table mat-table [dataSource]="dataEmployee" class="mat-elevation-z8" id="employee-table">
-
-
-
-
-        <!-- Interaction Type Column -->
-        <ng-container matColumnDef="Interactions Type">
-          <th mat-header-cell *matHeaderCellDef>Interaction Type</th>
-          <td mat-cell *matCellDef="let element"> {{element.taskType}} </td>
-        </ng-container>
-
-        <!-- Date & Time Column -->
-        <ng-container matColumnDef="Date & Time">
-          <th mat-header-cell *matHeaderCellDef> Date</th>
-          <td mat-cell *matCellDef="let element"> {{element.date}} </td>
-        </ng-container>
-        <!-- Employee Column -->
-        <ng-container matColumnDef="Employee">
-          <th mat-header-cell *matHeaderCellDef> Employee </th>
-          <td mat-cell *matCellDef="let element"> {{element.owner}} </td>
-        </ng-container>
-        <!-- Outcome Column -->
-        <ng-container matColumnDef="Outcome">
-          <th mat-header-cell *matHeaderCellDef> Outcome </th>
-          <td mat-cell *matCellDef="let element"> {{element.status}} </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
-      </table>
-    </div>
-    <br>
-    <br>
-    <h6>Leads Conversion</h6>
-    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Leads Stats
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <div class="content">
-
-        <div class="slider flex gap-1em m-b-2em" #content>
-          <div class="reports-update">
-            <div class="update">
-              <mat-card class="height-250px width-250px flex gap-1em">
-                <mat-card-title class="text-center">Leads</mat-card-title>
-                <mat-card-content>
-                  <!-- <label>Month: 2 January 2024</label><br> -->
-                  <label>All Leads: {{leadsCount}}</label><br>
-                  <label>Approved: {{approvedCount}}</label><br>
-                  <label>Rejected:{{rejectCount}}</label><br>
-                </mat-card-content>
-              </mat-card>
-            </div>
-            <br>
-            <div class="chart full-weight">
-              <app-pie></app-pie>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </mat-expansion-panel>
-    <h6>Feedback and Continuos Improvements</h6>
+       <h6>Feedback and Continuos Improvements</h6>
     <div class="feedback">
       <mat-accordion>
-        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Employees
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <div class="panel">
-            <mat-card class="half-width " *ngFor="let feeds of feedback">
-              <mat-card-title> <span class="material-symbols-outlined">
-                  person
-                </span>Feedback</mat-card-title>
-              <mat-card-content>
-                {{feeds.message}}
-              </mat-card-content>
-            </mat-card>
-          </div>
-
-        </mat-expansion-panel>
         <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
           <mat-expansion-panel-header>
             <mat-panel-title>

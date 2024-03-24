@@ -10,29 +10,17 @@ import * as XLSX from 'xlsx';
 })
 
 export class ReportsComponent implements AfterViewInit {
-  dataCustomers: any;
-  dataEmployee: any;
-
-
-  currentDate: Date = new Date();
-  fileName = 'ReportSheet.xlsx';
-
   // reports: any;
   leads: any;
   airtime: any;
+  electricity:any;
   customers: any;
   feedback: any;
-
-
-  displayedColumns2: string[] = ['Interactions Type', 'Date & Time', 'Employee', 'Outcome'];
-
-
-  @ViewChild('content') content!: ElementRef;
+//Count Stats
   leadsCount: any = 0;
   rejectCount: any = 0;
   approvedCount: any = 0;
   transactionsCount: any = 0;
-  
   electricityCount: any = 0;
   AvenueCount: any = 0
   DepositsCount: any = 0
@@ -51,26 +39,16 @@ export class ReportsComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.cd.detectChanges();
-    this.getTransactions();
-    this.getAvenue();
-    this.getDeposits();
-    this.getFeedback();
-    this.getAirtimeSales();
-    this.getWithdrawals();
-  }
-
-  exportexcel(tableName: string): void {
-    /* pass here the table id */
-    let element = document.getElementById(tableName);
-    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
-
-    /* generate workbook and add the worksheet */
-    const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-
-    /* save to file */
-    XLSX.writeFile(wb, this.fileName);
-
+    this.leadsCount
+    this.rejectCount
+    this.approvedCount
+    this.transactionsCount
+    this.electricityCount
+    this.AvenueCount   
+    this.DepositsCount    
+     this.FeedbackCount    
+    this.AirtimeSalesCount    
+    this.WithdrawalsCount  
   }
 
   getTransactions() {
@@ -104,7 +82,10 @@ export class ReportsComponent implements AfterViewInit {
       next: (res: any) => {
         console.log(res);
         this.feedback = res
-
+        this.feedback.forEach(()=>{
+          this.FeedbackCount = this.FeedbackCount + 1
+        })
+        this.updateFeedback()
       },
       error: (err: any) => console.log("error", err),
       complete: () => { }
@@ -118,15 +99,28 @@ export class ReportsComponent implements AfterViewInit {
         this.airtime.forEach(() => {
           this.AirtimeSalesCount = this.AirtimeSalesCount + 1
         });
-        console.log(this.airtime)
-        
-        console.log("Airtime Count",this.AirtimeSalesCount)
-
+        this.updateAirtime()
+        this.updateSales()
       },
       error: (err: any) => console.log("error", err),
       complete: () => { }
     });
   }
+ getElectcitySales(){
+  this.api.genericGet('/get-electricity').subscribe({
+    next: (res: any) => {
+      this.electricity = res
+      this.electricity.forEach(() => {
+        this.electricityCount = this.electricityCount + 1
+      });
+      this.updateElectricity()
+      this.updateSales()
+    },
+    error: (err: any) => console.log("error", err),
+    complete: () => { }
+  });
+ }
+
   getWithdrawals() {
     this.api.genericGet('/get-feedback').subscribe({
       next: (res: any) => {
@@ -136,13 +130,26 @@ export class ReportsComponent implements AfterViewInit {
       complete: () => { }
     });
   }
+
+  //Update Counts
+  updateAirtime(){
+    this.record[2].number = this.AirtimeSalesCount
+  }
+  updateElectricity(){
+    this.record[3].number = this.electricityCount 
+  }
+  updateSales(){
+    this.record[0].number = this.AirtimeSalesCount + this.electricityCount + this.FeedbackCount
+  }
+  updateFeedback(){
+    this.record[1].number = this.FeedbackCount
+ 
+  }
   record: any = [
     { Name: 'Transaction', img: '../../assets/images/customers.png', number: this.transactionsCount },
-    { Name: 'Total Revenue', img: '../../assets/images/leads.png', number: this.AvenueCount },
+    { Name: 'Feedbacks', img: '../../assets/images/leads.png', number: this.FeedbackCount },
     { Name: 'Airtime Sales', img: '../../assets/images/tasks.png', number:this.AirtimeSalesCount },
-    { Name: 'Electricity Sales', img: '../../assets/images/tasks.png', number:this.electricityCount },
-    { Name: 'Withdrwals', img: '../../assets/images/reports.png', number: this.WithdrawalsCount },
-    { Name: 'Deposits', img: '../../assets/images/reports.png', number: this.DepositsCount }
+    { Name: 'Electricity Sales', img: '../../assets/images/tasks.png', number:this.electricityCount }
   ];
   panelOpenState = false;
 
