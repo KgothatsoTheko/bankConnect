@@ -1,58 +1,78 @@
-.main-contanier{
+.main-contanier {
     height: 100vh;
 }
 
-.int-customer{
+.int-customer,
+.int-employee {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2em;
 }
-.tool-height{
+
+.tool-height {
     height: 64px !important;
-    
+
 }
-.reports-update{
+
+.reports-update {
     display: flex;
     justify-content: space-around;
     margin-top: 4em;
     gap: 4em;
 }
-.text-center{
+
+.text-center {
     text-align: center;
 }
-.update , .chart{
+
+.update,
+.chart {
     height: 300px;
     // width: 500px;
 }
-.full-weight{
+
+.full-weight {
     width: 100%;
 }
-.full-height{
+
+.full-height {
     height: 100%;
 }
-.height-250px{
- height: 250px;
+
+.height-250px {
+    height: 250px;
 }
-.width-250px{
+
+.width-250px {
     width: 350px;
 }
-.flex{
-display: flex;
-} 
-.space-center{
+
+.flex {
+    display: flex;
+}
+
+.space-center {
     justify-content: space-between;
     align-items: center;
 }
 
-.feedback{
-    .mat-mdc-card{
+.feedback {
+    .mat-mdc-card {
         width: 200px;
     }
+
+    .panel {
+        display: flex;
+        gap: 2em;
+        flex-wrap: wrap;
+    }
 }
-h6{
+
+h6 {
     margin-top: 2em;
 }
+
 .content {
     position: relative;
     padding: 0 1em;
@@ -78,7 +98,107 @@ h6{
     }
 }
 
-.m-b-2em{
+.m-b-2em {
     margin-bottom: 2em;
 }
-   
+
+.card {
+    width: 40%;
+    display: flex;
+    gap: 2em;
+    height: 125px;
+    border: 2px solid rgb(224, 142, 19);
+    // border-radius: 50px;
+    // flex-wrap: wrap;
+}
+
+.card:hover {
+    background-color: rgba(255, 166, 0, 0.315);
+    cursor: pointer;
+    height: 130px;
+    width: 35%;
+}
+
+.column {
+    flex-direction: row;
+}
+
+.reports-table {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em;
+}
+.text-center{
+    text-align: center;
+}
+.container {
+    overflow: hidden;
+  }
+  
+  body {
+    font-family: sans-serif;
+  }
+  
+  .content {
+    width: 30%;
+    height: 150px;
+    border-radius: 7px;
+    overflow: hidden;
+    border: 1px solid gray;
+    box-shadow: 2px 2px grey;
+    animation-name: slideLeft;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+    animation-direction: alternate;
+    animation-play-state: running;
+    animation-timing-function: ease-in-out;
+  }
+  
+  .content:hover {
+  
+    color: orange;
+  }
+  
+  .content:hover h3 {
+    color: orange;
+    transform: scale(1.1); /* Increase size on hover */
+  }
+  
+  //flex
+  .flex {
+    display: flex;
+  }
+  
+  .center-center {
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .spacebetween {
+    justify-content: space-between;
+  }
+  
+  .text-align {
+    text-align: center;
+  }
+  
+  //card
+  mat-card{
+    background-color: rgba(236, 234, 234, 0.643);
+  }
+  
+  //gap
+  .gap-1 {
+    gap: 1em;
+  }
+  
+  .gap-05 {
+    gap: .5em;
+  }
+  
+  //animation
+  @keyframes slideLeft {
+    from {
+      transform: translateX(300%)
+    }
+  }

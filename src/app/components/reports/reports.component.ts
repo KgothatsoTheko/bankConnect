@@ -10,43 +10,58 @@ import * as XLSX from 'xlsx';
 })
 
 export class ReportsComponent implements AfterViewInit {
-  dataSource: any;
+  dataCustomers: any;
+  dataEmployee: any;
+
+
   currentDate: Date = new Date();
   fileName = 'ReportSheet.xlsx';
-  reports: any;
+
+  // reports: any;
   leads: any;
-  tasks: any;
-  displayedColumns: string[] = ['Customer', 'Contact', 'Interactions Type', 'Date & Time', 'Employee', 'Outcome'];
-  isLeftDisabled: boolean = true;
-  isRightDisabled: boolean = false;
-  customerName: any;
+  airtime: any;
+  customers: any;
+  feedback: any;
+
+
+  displayedColumns2: string[] = ['Interactions Type', 'Date & Time', 'Employee', 'Outcome'];
+
 
   @ViewChild('content') content!: ElementRef;
   leadsCount: any = 0;
   rejectCount: any = 0;
   approvedCount: any = 0;
+  transactionsCount: any = 0;
+  
+  electricityCount: any = 0;
+  AvenueCount: any = 0
+  DepositsCount: any = 0
+  FeedbackCount: any = 0
+  AirtimeSalesCount: any = 0
+  WithdrawalsCount: any = 0
 
-  allUsers: any[] = [];
-  newUsers: any[] = []
   constructor(private api: ApiService, private snackBar: MatSnackBar, private cd: ChangeDetectorRef) {
-    this.getLeads();
-    this.getReports();
-    this.getTasks();
-
-    this.allUsers.forEach((ele: any) => {
-      console.log(this.allUsers)
-    })
+    this.getTransactions();
+    this.getAvenue();
+    this.getDeposits();
+    this.getFeedback();
+    this.getAirtimeSales();
+    this.getWithdrawals();
   }
 
   ngAfterViewInit() {
-    this.isRightDisabled = (this.content.nativeElement.scrollWidth < window.innerWidth);
-    // Trigger Change Detect manually
     this.cd.detectChanges();
+    this.getTransactions();
+    this.getAvenue();
+    this.getDeposits();
+    this.getFeedback();
+    this.getAirtimeSales();
+    this.getWithdrawals();
   }
 
-  exportexcel(): void {
+  exportexcel(tableName: string): void {
     /* pass here the table id */
-    let element = document.getElementById('report-table');
+    let element = document.getElementById(tableName);
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
 
     /* generate workbook and add the worksheet */
@@ -57,74 +72,25 @@ export class ReportsComponent implements AfterViewInit {
     XLSX.writeFile(wb, this.fileName);
 
   }
-  handleOnSlide(type: string) {
-    let scrollValue;
-    console.log(this.content)
-    if (this.content.nativeElement.scrollWidth > window.innerWidth) {
-      // Removing 110px which is the white space on the left and right of the content and the scrollbar
-      if (type === 'left') {
-        scrollValue = this.content.nativeElement.scrollLeft - (window.innerWidth - 110);
-      } else {
-        scrollValue = this.content.nativeElement.scrollLeft + (window.innerWidth - 110);
-      }
 
-      // Added this to add an animation while scrolling...
-      this.content.nativeElement.scrollTo({
-        left: scrollValue,
-        behavior: 'smooth'
-      });
-
-      let totalUsedWidth = scrollValue + window.innerWidth;
-
-      this.isRightDisabled = (totalUsedWidth >= this.content.nativeElement.scrollWidth);
-      this.isLeftDisabled = (scrollValue < 1);
-    } else {
-      this.isLeftDisabled = true;
-      this.isRightDisabled = true;
-    }
-  }
-  getLeads() {
-    this.api.genericGet('/get-lead').subscribe({
-      next: (res: any) => {
-        this.leads = res
-        this.leads.forEach((ele: any) => {
-          this.leadsCount = this.leadsCount + 1
-          // console.log(ele.status)
-          if (ele.outcome === 'completed') {
-            this.approvedCount = this.approvedCount + 1
-          } else {
-            this.rejectCount = this.rejectCount + 1
-          }
-
-        });
-        this.allUsers.push(res)
-      },
-      error: (error: any) => {
-        console.error('Error:', error);
-      }
-    });
-  }
-  getReports() {
+  getTransactions() {
     this.api.genericGet('/get-report')
       .subscribe({
         next: (res: any) => {
-          this.reports = res
-          console.log(res)
-          this.dataSource = this.reports;
-          this.allUsers.push(res)
-          // console.log(this.allUsers)
         },
         error: (err: any) => this.snackBar.open(err, 'Ok', { duration: 3000 }),
         complete: () => { }
       })
   }
-  getTasks() {
+  getDeposits() {
+    this.api.genericGet('/get-customer').subscribe({
+      next: (res: any) => {
+      }
+    })
+  }
+  getAvenue() {
     this.api.genericGet('/get-task').subscribe({
       next: (res: any) => {
-        this.tasks = res;
-
-        this.allUsers.push(res)
-        console.log(this.allUsers)
 
       },
       error: (error: any) => {
@@ -133,6 +99,51 @@ export class ReportsComponent implements AfterViewInit {
     });
 
   }
+  getFeedback() {
+    this.api.genericGet('/get-feedback').subscribe({
+      next: (res: any) => {
+        console.log(res);
+        this.feedback = res
+
+      },
+      error: (err: any) => console.log("error", err),
+      complete: () => { }
+    });
+  }
+  getAirtimeSales() {
+    this.api.genericGet('/get-airtime').subscribe({
+      next: (res: any) => {
+        console.log(res);
+        this.airtime = res
+        this.airtime.forEach(() => {
+          this.AirtimeSalesCount = this.AirtimeSalesCount + 1
+        });
+        console.log(this.airtime)
+        
+        console.log("Airtime Count",this.AirtimeSalesCount)
+
+      },
+      error: (err: any) => console.log("error", err),
+      complete: () => { }
+    });
+  }
+  getWithdrawals() {
+    this.api.genericGet('/get-feedback').subscribe({
+      next: (res: any) => {
+
+      },
+      error: (err: any) => console.log("error", err),
+      complete: () => { }
+    });
+  }
+  record: any = [
+    { Name: 'Transaction', img: '../../assets/images/customers.png', number: this.transactionsCount },
+    { Name: 'Total Revenue', img: '../../assets/images/leads.png', number: this.AvenueCount },
+    { Name: 'Airtime Sales', img: '../../assets/images/tasks.png', number:this.AirtimeSalesCount },
+    { Name: 'Electricity Sales', img: '../../assets/images/tasks.png', number:this.electricityCount },
+    { Name: 'Withdrwals', img: '../../assets/images/reports.png', number: this.WithdrawalsCount },
+    { Name: 'Deposits', img: '../../assets/images/reports.png', number: this.DepositsCount }
+  ];
   panelOpenState = false;
 
 }
