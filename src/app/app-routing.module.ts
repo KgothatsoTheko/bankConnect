@@ -12,6 +12,7 @@ import { AdminRegisterComponent } from './forms/admin-register/admin-register.co
 import { WelcomeMessageComponent } from './welcome-message/welcome-message.component';
 import { CustomerComponent } from './components/customer/customer.component';
 import { DeleteComponent } from './popUp/delete/delete.component';
+import { ReportzComponent } from './components/reportz/reportz.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/Login', pathMatch: 'full' },
@@ -25,6 +26,7 @@ const routes: Routes = [
       { path: 'qrCode', component: QrCodeComponent },
       { path: 'profile', component: EmployeesComponent },
       { path: 'report', component: ReportsComponent },
+      {path: 'reportz', component: ReportzComponent}
     ]
   },
   { path: 'registration', component: AdminRegisterComponent },

@@ -13,7 +13,7 @@ import { ApiService } from 'src/app/services/api.service';
 export class LoginComponent {
   
   public login:boolean = false;
-  parsedData: any; // Object to hold parsed data
+  parsedData: any;
 
   signInForm: FormGroup;
   constructor(private service:ApiService, private snackbar:MatSnackBar, private router: Router){

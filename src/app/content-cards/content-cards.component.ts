@@ -91,6 +91,5 @@ export class ContentCardsComponent {
     { label: 'Customers', img: '../../assets/images/customers.png', number: "" },
     { label: 'Leads', img: '../../assets/images/Leads.png', number: this.leadsCount }, 
     { label: 'Tasks', img: '../../assets/images/tasks.png', number: this.tasksCount },
-    { label: 'Reports', img: '../../assets/images/reports.png', number: "" }
   ];
 }

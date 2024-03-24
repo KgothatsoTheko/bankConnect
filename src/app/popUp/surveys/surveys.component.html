@@ -1,0 +1,14 @@
+<div class="main-containerr">
+    <h1 class="flex center-center">
+        Messages
+    </h1>
+    <mat-card *ngFor="let comment of comments; let i = index">
+      <span>
+        <img src="../../assets/images/man.png" class="icon" alt=""> 
+      </span>
+      <div class="comments">
+        <h4>{{comment}}</h4>
+      </div>
+    </mat-card>
+  </div>
+  

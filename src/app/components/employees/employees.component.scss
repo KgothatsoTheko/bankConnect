@@ -1,41 +1,39 @@
 //containers
-.main-container{
+.main-container {
     height: 83vh;
     display: flex;
     flex-wrap: wrap;
 
 }
 
-.mini-container{
-width: 47%;
-height: 47%;
-justify-content: end;
-}
-
-.mini-containerr{
+.mini-container {
     width: 47%;
     height: 47%;
     justify-content: end;
-    align-items: end;
-    }
+    border: 1px solid gray;
+    border-radius: 10px;
+}
 
-img{
-    margin-right: 1em;
+.mini-containerr {
+    width: 47%;
+    height: 47%;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid gray;
+    border-radius: 10px;
 
 }
 
-
-
-.red{
+.red {
     background-color: red($color: #000000);
 }
 
-.center{
+.center {
     margin-left: 1em;
 }
 
 //image
-.profile-pic{
+.profile-pic {
     background-color: white;
     height: 100%;
     width: 30%;
@@ -44,30 +42,31 @@ img{
 }
 
 //chart
-.pie{
+.pie {
     width: 50%;
 }
 
 //qrcode
-.qrCode{
-    margin-top: 2em;
+.qrCode {
+    // margin-top: 2em;
 }
 
 //date and events
 
-.date, .events{
+.date,
+.events {
     border: 2px solid orange;
     box-shadow: 2px 1px orange;
     border-radius: 7px;
 }
 
-.info{
+.info {
     display: flex;
     justify-content: end;
     align-items: end;
 }
 
-mat-card{
+mat-card {
     overflow: hidden;
     width: 100%;
     height: 100%;
@@ -75,8 +74,8 @@ mat-card{
     box-shadow: 3px 2px black;
 }
 
-.box{
-    justify-content: end;
-    align-items: end;
+.box {
+    justify-content: center;
+    align-items: center;
     display: flex;
 }

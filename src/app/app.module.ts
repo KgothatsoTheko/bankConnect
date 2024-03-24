@@ -40,6 +40,10 @@ import { CustomerBarComponent } from './charts/customer-bar/customer-bar.compone
 import { CustomerTableComponent } from './tables/customer-tables/customer-table.component';
 import { DeleteComponent } from './popUp/delete/delete.component';
 import { CustomerEditComponent } from './components/customer-edit/customer-edit.component';
+import { ReportzComponent } from './components/reportz/reportz.component';
+import { ReportBarComponent } from './charts/report-bar/report-bar.component';
+import { ReportChartComponent } from './charts/report-chart/report-chart.component';
+import { SurveysComponent } from './popUp/surveys/surveys.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +75,11 @@ import { CustomerEditComponent } from './components/customer-edit/customer-edit.
     CustomerBarComponent,
     CustomerTableComponent,
     DeleteComponent,
-    CustomerEditComponent
+    CustomerEditComponent,
+    ReportzComponent,
+    ReportBarComponent,
+    ReportChartComponent,
+    SurveysComponent
   ],
   imports: [
     BrowserModule,

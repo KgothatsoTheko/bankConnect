@@ -1,0 +1,59 @@
+<div class="main-container">
+
+    <div class="first flex full-width spacebetween-center">
+        <div class="inner spacebetween-center flex column gap-1em">
+
+            <div class="full-height money">
+                <mat-card class="full-height">
+                    <h5>
+                        Revenue
+                    </h5>
+                    <div class="number full-height full-width">
+                        <h1>
+                            256,789
+                        </h1>
+                    </div>
+                </mat-card>
+            </div>
+
+            <div class="full-height leads">
+                <mat-card class="full-height">
+                    <h5>
+                        Leads
+                    </h5>
+                    <div class="number full-height full-width">
+                        <h1>
+                           {{leadsCount}}
+                        </h1>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+
+        <div class=" full-height full-width">
+            <mat-card class=" bar full-height full-width">
+                <app-report-bar></app-report-bar>
+            </mat-card>
+        </div>
+    </div>
+
+    <div class="second full-height gap-1em full-width flex">
+        <div class="left">
+            <mat-card class="pie full-height full-width">
+                <h3>
+                 <b>  Males to Females </b>
+                </h3>
+                <app-report-chart></app-report-chart>
+            </mat-card>
+        </div>
+
+        <div class="Right">
+            <mat-card class="survey full-height  full-width" (click)="survey()">
+                <h2 class="flex center-center">
+                    <b>Messages</b>
+                </h2>
+                <img src="../../../assets/images/surveys.svg" height="70%"  alt="">
+            </mat-card>
+        </div>
+    </div>
+</div>
