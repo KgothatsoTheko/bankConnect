@@ -1,7 +1,6 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiService } from 'src/app/services/api.service';
-import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-reports',
@@ -10,45 +9,29 @@ import * as XLSX from 'xlsx';
 })
 
 export class ReportsComponent implements AfterViewInit {
-  // reports: any;
-  leads: any;
+//Report Feilds
   airtime: any;
   electricity:any;
-  customers: any;
   feedback: any;
 //Count Stats
-  leadsCount: any = 0;
-  rejectCount: any = 0;
-  approvedCount: any = 0;
   transactionsCount: any = 0;
   electricityCount: any = 0;
-  AvenueCount: any = 0
-  DepositsCount: any = 0
   FeedbackCount: any = 0
   AirtimeSalesCount: any = 0
-  WithdrawalsCount: any = 0
 
   constructor(private api: ApiService, private snackBar: MatSnackBar, private cd: ChangeDetectorRef) {
     this.getTransactions();
-    this.getAvenue();
-    this.getDeposits();
     this.getFeedback();
     this.getAirtimeSales();
-    this.getWithdrawals();
+    this.getElectcitySales();
   }
 
   ngAfterViewInit() {
     this.cd.detectChanges();
-    this.leadsCount
-    this.rejectCount
-    this.approvedCount
     this.transactionsCount
-    this.electricityCount
-    this.AvenueCount   
-    this.DepositsCount    
+    this.electricityCount    
      this.FeedbackCount    
-    this.AirtimeSalesCount    
-    this.WithdrawalsCount  
+    this.AirtimeSalesCount   
   }
 
   getTransactions() {
@@ -60,23 +43,7 @@ export class ReportsComponent implements AfterViewInit {
         complete: () => { }
       })
   }
-  getDeposits() {
-    this.api.genericGet('/get-customer').subscribe({
-      next: (res: any) => {
-      }
-    })
-  }
-  getAvenue() {
-    this.api.genericGet('/get-task').subscribe({
-      next: (res: any) => {
 
-      },
-      error: (error: any) => {
-        console.error('Error:', error);
-      }
-    });
-
-  }
   getFeedback() {
     this.api.genericGet('/get-feedback').subscribe({
       next: (res: any) => {
@@ -120,17 +87,6 @@ export class ReportsComponent implements AfterViewInit {
     complete: () => { }
   });
  }
-
-  getWithdrawals() {
-    this.api.genericGet('/get-feedback').subscribe({
-      next: (res: any) => {
-
-      },
-      error: (err: any) => console.log("error", err),
-      complete: () => { }
-    });
-  }
-
   //Update Counts
   updateAirtime(){
     this.record[2].number = this.AirtimeSalesCount
