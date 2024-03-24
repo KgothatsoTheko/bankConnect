@@ -34,6 +34,14 @@ module.exports = {
             res.status(500).send(error)
         }
     },
+    getAirtime: async (req, res) => {
+        try {
+            const result = await Airtimes.find(req.params);
+            res.status(200).send(result)
+        } catch (error) {
+            res.status(500).send(error);
+        }
+    },
     addElectricity: async (req, res) => {
         try {
             const payload = { ...req.body };
@@ -44,6 +52,14 @@ module.exports = {
             res.status(500).send(error)
         }
     },
+    getElectricity: async (req, res) => {
+        try {
+            const result = await Electricities.find(req.params);
+            res.status(200).send(result)
+        } catch (error) {
+            res.status(500).send(error);
+        }
+    },
     addFeedback: async (req, res) => {
         try {
             const payload = { ...req.body };
@@ -52,6 +68,14 @@ module.exports = {
             res.status(201).send(result)
         } catch (error) {
             res.status(500).send(error)
+        }
+    },
+    getFeedback: async (req, res) => {
+        try {
+            const result = await Feedback.find(req.params);
+            res.status(200).send(result)
+        } catch (error) {
+            res.status(500).send(error);
         }
     },
 }

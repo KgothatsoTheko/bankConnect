@@ -11,22 +11,40 @@ import * as XLSX from 'xlsx';
   styleUrls: ['./customer-table.component.scss']
 })
 export class CustomerTableComponent {
-  displayedColumns: string[] = ['transactionId', 'customerName', 'transactionType', 'amount', 'date', 'status'];
+  displayedColumns: string[] = ['transactionId', 'customerName', 'provider', 'amount',];
+  displayedColumns2: string[] = ['transactionId', 'customerName', 'meterNo', 'amount',];
   dataSource!: MatTableDataSource<any>;
+  dataSource2!: MatTableDataSource<any>;
  
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private api: ApiService) {
-    this.getCustomerTransaction();
+    this.getAirtimeTransactions();
+    this.getElectricityTransactions();
   }
 
-  getCustomerTransaction() {
-    this.api.genericGet("/get-lead").subscribe({
+  getAirtimeTransactions() {
+    this.api.genericGet("/get-airtime").subscribe({
       next: (res: any) => {
         this.dataSource = new MatTableDataSource(res)
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+
+        console.log(res)
+      },
+      error: (error: any) => {
+        console.log('Error', error)
+      }
+    })
+  }
+
+  getElectricityTransactions() {
+    this.api.genericGet("/get-electricity").subscribe({
+      next: (res: any) => {
+        this.dataSource2 = new MatTableDataSource(res)
+        this.dataSource2.paginator = this.paginator;
+        this.dataSource2.sort = this.sort;
 
         console.log(res)
       },
