@@ -26,6 +26,4 @@ export class EmployeesComponent implements AfterViewInit{
   }
 
   user:any
-
-
 }

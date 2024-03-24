@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { SafeUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
+  // encapsulation: ViewEncapsulation.Emulated,
   selector: 'app-qr-code',
   templateUrl: './qr-code.component.html',
   styleUrls: ['./qr-code.component.scss']
@@ -13,7 +14,7 @@ export class QrCodeComponent implements OnInit {
   public myAngularxQrCode: string = '';
   public qrCodeDownloadLink: SafeUrl = '';
   public login: boolean = false;
-  parsedData: any; // Object to hold parsed data
+  parsedData: any; 
   user: any;
 
   constructor(private router: Router, private service: ApiService) {}

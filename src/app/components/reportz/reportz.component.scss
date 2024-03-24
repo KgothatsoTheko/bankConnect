@@ -1,0 +1,71 @@
+.main-container{
+    height: auto;
+}
+
+h3{
+    margin: 0;
+}
+
+mat-card{
+    width: 100%;
+    padding: 7px;
+}
+
+.first{
+    height: 49%;
+}
+
+.inner{
+    width: 65%;
+}
+
+.number{
+    justify-content: end;
+    align-items: end;
+    display: flex;
+}
+
+.graph{
+    height: 100%;
+    width: 100%;
+}
+
+.bar{
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    height: 100% !important;
+}
+
+.money, .leads{
+    background-color: aqua;
+    width: 80%;
+}
+
+//second
+.second{
+    margin-top: 1em;
+    height: 50%;
+    max-height: 60%;
+}
+
+.survey{
+    height: 49% !important;
+    cursor: pointer;
+}
+.left, .Right{
+    width: 50%;
+}
+
+img{
+    // background-color: aqua;
+    color: red;
+}
+
+.pie{
+    display: flex;
+    justify-content: baseline;
+    align-items: center;
+    width: 100%;
+}
