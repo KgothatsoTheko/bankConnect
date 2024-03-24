@@ -1,6 +1,6 @@
 <div *ngIf="!login && isQR" class="flex full-width">
     <div class="code full-width">
-        <qrcode (qrCodeURL)="onChangeURL($event)" [qrdata]="myAngularxQrCode" [width]="300"
+        <qrcode (qrCodeURL)="onChangeURL($event)" [qrdata]="myAngularxQrCode" [width]="256"
             [errorCorrectionLevel]="'M'"></qrcode>
     </div>
 
