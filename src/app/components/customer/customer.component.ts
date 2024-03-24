@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { RegisterLeadComponent } from 'src/app/forms/register-lead/register-lead.component';
 import { ApiService } from 'src/app/services/api.service';
 import * as XLSX from 'xlsx';
+import { CustomerEditComponent } from '../customer-edit/customer-edit.component';
 
 
 @Component({
@@ -16,7 +17,7 @@ import * as XLSX from 'xlsx';
 })
 export class CustomerComponent {
 
-  displayedColumns: string[] = ['name', 'surname', 'ID', 'email', 'gender','contact', 'citizenship','action'];
+  displayedColumns: string[] = ['name', 'surname', 'ID', 'email', 'gender','contact','action'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -28,7 +29,7 @@ export class CustomerComponent {
 
  
   getCustomers() {
-    this.api.genericGet("/get-lead").subscribe({
+    this.api.genericGet("/get-customer").subscribe({
       next:(res:any) =>{
         this.dataSource = new MatTableDataSource(res)
         this.dataSource.paginator = this.paginator;
@@ -44,26 +45,32 @@ export class CustomerComponent {
   isEdit!:boolean
 
   edit(row: any): void {
-    const action = this.isEdit ? 'Edit' : 'View Profile';
-  
-    const dialogRef = this.dialog.open(RegisterLeadComponent, { 
-      data: { ...row, action: action } 
+    const dialogRef = this.dialog.open(CustomerEditComponent, { 
+      data: { ...row, action: 'Edit' } 
     });
-    dialogRef.afterClosed().subscribe(result => { 
-      if (!result) {
-        this.snackbar.open('Update was closed', 'Ok', { duration: 3000 })
-      } else {
-        this.snackbar.open(result, 'Ok', { duration: 3000 })
+    dialogRef.componentInstance.customerUpdated.subscribe((updatedCustomer: any) => {
+      const index = this.dataSource.data.findIndex((customer: any) => customer.email === updatedCustomer.name);
+
+      if (index !== -1) {
+        this.dataSource.data[index] = updatedCustomer;
+        this.dataSource._updateChangeSubscription();
       }
     });
-    this.update(row)
+  
+    dialogRef.afterClosed().subscribe(result => { 
+      if (!result) {
+        this.snackbar.open('Update was closed', 'Ok', { duration: 3000 });
+      } else {
+        this.snackbar.open(result, 'Ok', { duration: 3000 });
+      }
+    });
   }
 
   update(row:any){
-    const updatedLead = this.displayedColumns; 
+    const updatedCustomer = this.displayedColumns; 
     const leadId = row._id; 
 
-    this.api.genericPost('/leads', updatedLead).subscribe({
+    this.api.genericPost('/get-customer', updatedCustomer).subscribe({
       next: (res: any) => {
         console.log(res);
       },
@@ -72,12 +79,25 @@ export class CustomerComponent {
     });
   }
 
-    delete(index: number){
-      console.log(index)
-      // let allCustomers =  this.getCustomers();
-      // console.log('customers', allCustomers)
-      // let tt = this.getCustomers().splice(index, 1)
+    // delete(index: number){
+    //   console.log(index)
+    //   // let allCustomers =  this.getCustomers();
+    //   // console.log('customers', allCustomers)
+    //   // let tt = this.getCustomers().splice(index, 1)
   
+    // }
+
+    delete(row: any) {
+      const email = row.email; 
+      this.api.genericDelete(`/delete-customer/${email}`).subscribe({
+        next: (res: any) => {
+          this. getCustomers();
+          this.snackbar.open('Customer deleted successfully', 'Ok', { duration: 3000 });
+        },
+        error: (error: any) => {
+          this.snackbar.open('Error deleting customer', 'Ok', { duration: 3000 });
+        }
+      });
     }
 
   applyFilter(event: Event) {

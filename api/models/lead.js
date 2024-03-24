@@ -17,7 +17,7 @@ const Lead = new mongoose.Schema({
     surname: { type: String, required: true },
     email: { type: String, required: true, lowercase: true, index: { unique: true } },
     contact: { type: Number, required: true },
-    reference: { type: String, required: true },
+    Source: { type: String, required: true },
 })
 
 module.exports = mongoose.model('leads', Lead);

@@ -1,6 +1,7 @@
 const Airtimes = require('../models/airtime');
 const Electricities = require('../models/electricity');
 const Feedback = require('../models/feedback');
+const Customer = require('../models/feedback');
 const mongoose = require("mongoose")
 
 
@@ -10,6 +11,17 @@ module.exports = {
             res.send('Welcome to My Backend');
         } catch (error) {
             res.status(500).send(error)
+        }
+    },
+    //Updating data to mongo
+    withdrawCustomerBalance: async (req, res) => {
+        const options = { upsert: true };
+        const filter = { ...req.params }
+        try {
+            const result = await Customer.updateOne(filter, req.body, options);
+            res.status(200).send(result)
+        } catch (error) {
+            res.status(500).send(error);
         }
     },
     addAirtime: async (req, res) => {

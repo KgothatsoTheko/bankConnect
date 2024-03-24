@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { RegisterLeadComponent } from 'src/app/forms/register-lead/register-lead.component';
+import { DeleteComponent } from 'src/app/popUp/delete/delete.component';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -13,14 +14,15 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./leads.component.scss']
 })
 export class LeadsComponent {
-  displayedColumns: string[] = ['name', 'surname', 'gender', 'ID', 'actions'];
+  displayedColumns: string[] = ['name', 'surname','age', 'gender','contact' , 'ID', 'actions'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   dataSource!: MatTableDataSource<any>;
 
-  constructor(private dialog: MatDialog, private api: ApiService, private snackbar: MatSnackBar) {
+  constructor(private dialog: MatDialog, private api: ApiService,
+     private snackbar: MatSnackBar,) {
     this.getLeads();
   }
 
@@ -30,7 +32,6 @@ export class LeadsComponent {
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-      
       },
       error: (error: any) => {
         console.error('Error:', error);
@@ -42,6 +43,15 @@ export class LeadsComponent {
     const dialogRef = this.dialog.open(RegisterLeadComponent, { 
       data: { ...row, action: 'Edit' } 
     });
+    dialogRef.componentInstance.leadUpdated.subscribe((updatedLead: any) => {
+      const index = this.dataSource.data.findIndex((lead: any) => lead.name === updatedLead.name);
+
+      if (index !== -1) {
+        this.dataSource.data[index] = updatedLead;
+        this.dataSource._updateChangeSubscription();
+      }
+    });
+  
     dialogRef.afterClosed().subscribe(result => { 
       if (!result) {
         this.snackbar.open('Update was closed', 'Ok', { duration: 3000 });
@@ -69,11 +79,25 @@ export class LeadsComponent {
   }
 
   delete(row: any) {
+    const dialogRef = this.dialog.open(DeleteComponent, {
+      width: '55vw',
+      maxWidth: '100vw',
+      height: '30vh'
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.deleteRow(row);
+      }
+    });
+  }
+  
+  deleteRow(row: any) {
     const email = row.email; 
     this.api.genericDelete(`/leads/${email}`).subscribe({
       next: (res: any) => {
         console.log('Lead deleted successfully:', res);
-        this.getLeads();
+        this.getLeads(); // Refresh the table
         this.snackbar.open('Lead deleted successfully', 'Ok', { duration: 3000 });
       },
       error: (error: any) => {

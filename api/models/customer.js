@@ -9,6 +9,7 @@ const Customer = new mongoose.Schema({
     contact: { type: Number, required: true },
     email: { type: String, required: true, lowercase: true, index: { unique: true } },
     pin: {type: String, required: true},
+    balance: {type: Number, required: false},
     // will add role
     // roles: { type: String, required: true },
     // help make security in api, false cause it is not need 

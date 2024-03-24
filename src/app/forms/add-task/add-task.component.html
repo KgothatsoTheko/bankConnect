@@ -12,16 +12,13 @@
         </mat-form-field>
 
         <mat-form-field appearance="fill">
-            <mat-label>Owner</mat-label>
-            <input type="text" matInput formControlName="owner" required>
-            <mat-error *ngIf="addTaskForm.get('owner')?.hasError('required')">
-                owner is required
-            </mat-error>
+            <mat-label>Admin Name</mat-label>
+            <input type="text" matInput formControlName="owner" readonly>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
             <mat-label>Description</mat-label>
-            <input type="text" matInput formControlName="description" maxlength="15" required>
+            <input type="text" matInput formControlName="description" required>
             <mat-error *ngIf="addTaskForm.get('description')?.hasError('required')">
                 description is required
             </mat-error>
@@ -64,9 +61,6 @@
         <mat-form-field appearance="fill">
             <mat-label>Task Type</mat-label>
             <mat-select formControlName="taskType">
-                <mat-option value="Walk-in">
-                    Walk-in
-                </mat-option>
                 <mat-option value="Call">
                     Call
                 </mat-option>
@@ -93,7 +87,7 @@
 
         <div class="flex center-center gap-1em">
             <div><button mat-raised-button class="btn-cancel" (click)="cancel()">Cancel</button></div>
-            <div><button mat-raised-button class="btn-submit" (click)=" submit()">Submit</button></div>
+            <div><button mat-raised-button class="btn-submit" (click)=" submit()" >Submit</button></div>
         </div>
     </form>
 </mat-card>
