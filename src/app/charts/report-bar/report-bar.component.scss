@@ -1,0 +1,17 @@
+.barz {
+    width: 800px; // Use full width of the container
+    border-radius: 7px !important;
+    height: 300px; // Use full height of the container
+    overflow: hidden; // Allow overflow if needed
+  }
+  
+  .data {
+    color: red !important;
+    width: 10px; // Use full width of the container
+  }
+  
+  canvas {
+    width: 800px !important; // Use full width of the container
+    height: auto; // Allow height to adjust based on content
+  }
+  

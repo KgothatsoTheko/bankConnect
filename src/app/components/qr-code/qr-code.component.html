@@ -1,11 +1,11 @@
-<div *ngIf="!login && isQR" class="flex">
-    <div>
-        <qrcode (qrCodeURL)="onChangeURL($event)" [qrdata]="myAngularxQrCode" [width]="256"
+<div *ngIf="!login && isQR" class="flex full-width">
+    <div class="code full-width">
+        <qrcode (qrCodeURL)="onChangeURL($event)" [qrdata]="myAngularxQrCode" [width]="300"
             [errorCorrectionLevel]="'M'"></qrcode>
     </div>
 
     <div *ngIf="isQR">
-        <h2>Your QR code is <span>Ready!</span> </h2>
+        <h3>Your QR code is <span>Ready!</span> </h3>
         <h5> <br>
             Click <a [href]="qrCodeDownloadLink" download="qrcode"> <span>here</span> </a>
             to <b>Download</b> the QR code and use it next time you login. <br><br>
@@ -22,10 +22,7 @@
 
     <!-- Loading -->
     <p *ngIf="action.isLoading">⌛ Loading...</p>
-
-    <!-- start -->
- 
-</div>
+</div> 
 
 <div class="flex center-center full-width column" *ngIf="istext">
     <img src="../../../assets/images/logo.png" width="45%" height="20%" alt="">
