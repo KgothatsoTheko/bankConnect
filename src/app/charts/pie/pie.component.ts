@@ -36,7 +36,7 @@ export class PieComponent {
   getReports(){
     this.api.genericGet('/get-report').subscribe({
       next: (res: any) => {
-        // console.log(res);
+        console.log(res);
         
       },
       error: (error: any) => {
