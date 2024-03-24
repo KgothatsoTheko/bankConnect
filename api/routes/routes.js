@@ -65,6 +65,6 @@ const multer = require('multer');
     router.post('/add-electricity', transactionController.addElectricity);
     router.get('/get-electricity', transactionController.getElectricity);
     router.post('/feedback', transactionController.addFeedback);
-    router.post('/get-feedback', transactionController.getFeedback);
+    router.get('/get-feedback', transactionController.getFeedback);
 
 module.exports = router;
