@@ -38,6 +38,7 @@ const multer = require('multer');
     router.get('/get-customer', customerController.getCustomer)
     router.post('/update-customer/:email', customerController.updateCustomer)
     router.post('/update-customerbalance/:email', customerController.updateCustomerBalance)
+    router.post('/withdraw-customerbalance/:email', customerController.withdrawCustomerBalance)
     router.delete('/delete-customer/:email', customerController.deleteCustomer)
 
     // Auth Routes
@@ -60,8 +61,10 @@ const multer = require('multer');
     const transactionController = require('../controllers/transactionsController');
     router.get('/', transactionController.defaultRoute);
     router.post('/add-airtime', transactionController.addAirtime);
+    router.get('/get-airtime', transactionController.getAirtime);
     router.post('/add-electricity', transactionController.addElectricity);
+    router.get('/get-electricity', transactionController.getElectricity);
     router.post('/feedback', transactionController.addFeedback);
-    router.post('/withdraw/:email', transactionController.withdrawCustomerBalance)
+    router.post('/get-feedback', transactionController.getFeedback);
 
 module.exports = router;

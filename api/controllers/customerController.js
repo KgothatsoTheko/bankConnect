@@ -66,6 +66,26 @@ module.exports = {
         }
     },
     //Updating data to mongo
+    withdrawCustomerBalance: async (req, res) => {
+        const email = req.params.email;
+        const withdrawAmount = req.body.withdrawAmount; // assuming you send withdrawAmount from Angular
+    
+        try {
+            const customer = await Customer.findOne({ email });
+            if (!customer) {
+                return res.status(404).send("Customer not found");
+            }
+    
+            // Update balance by adding withdrawAmount
+            customer.balance -= withdrawAmount;
+            await customer.save();
+    
+            res.status(200).send(customer); // Return updated customer object if needed
+        } catch (error) {
+            res.status(500).send(error);
+        }
+    },
+    //Updating data to mongo
     deleteCustomer: async (req, res) => {
         const query = { ...req.params }
         try {
