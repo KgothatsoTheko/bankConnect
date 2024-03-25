@@ -98,9 +98,7 @@ login(){
 IdValid() {
  
   this.DOB = this.registerForm.controls['ID'].value.toString(); 
- console.log(this.DOB);
  this.year = "19" + this.DOB.slice(0, 2);
- console.log(this.year)
  this.month = this.DOB.slice(2, 4);
  this.day = this.DOB.slice(4, 6);
 
@@ -149,7 +147,6 @@ generateQRCode() {
   if (dataFromStorage) {
     this.qrCodeData = dataFromStorage;
   }
-
 }
 
 }

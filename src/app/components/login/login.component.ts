@@ -38,7 +38,7 @@ export class LoginComponent {
       next: (res: any) => {
         const user = res.find((admin: any) => admin.email == this.signInForm.controls['email'].value);
         if (user) {
-          this.snackbar.open('User exists', 'OK', { duration: 3000 });
+          this.snackbar.open('Logging in...', 'OK', { duration: 3000 });
           sessionStorage.setItem('qr-user', JSON.stringify(user));
           this.router.navigate(['welcome'])
   }else{
