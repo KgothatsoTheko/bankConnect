@@ -29,7 +29,7 @@
             <mat-card class="half-width " *ngFor="let feeds of feedback">
               <mat-card-title> <span class="material-symbols-outlined">
                   person
-                </span>Feedback</mat-card-title>
+                </span>{{feeds.customerName}}</mat-card-title>
               <mat-card-content>
                 {{feeds.message}}
               </mat-card-content>
