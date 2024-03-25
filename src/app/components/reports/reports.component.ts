@@ -20,7 +20,7 @@ export class ReportsComponent implements AfterViewInit {
   AirtimeSalesCount: any = 0
 
   constructor(private api: ApiService, private snackBar: MatSnackBar, private cd: ChangeDetectorRef) {
-    this.getTransactions();
+
     this.getFeedback();
     this.getAirtimeSales();
     this.getElectcitySales();
@@ -28,21 +28,11 @@ export class ReportsComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.cd.detectChanges();
-    this.transactionsCount
     this.electricityCount    
      this.FeedbackCount    
     this.AirtimeSalesCount   
   }
 
-  getTransactions() {
-    this.api.genericGet('/get-report')
-      .subscribe({
-        next: (res: any) => {
-        },
-        error: (err: any) => this.snackBar.open(err, 'Ok', { duration: 3000 }),
-        complete: () => { }
-      })
-  }
 
   getFeedback() {
     this.api.genericGet('/get-feedback').subscribe({
@@ -95,7 +85,7 @@ export class ReportsComponent implements AfterViewInit {
     this.record[3].number = this.electricityCount 
   }
   updateSales(){
-    this.record[0].number = this.AirtimeSalesCount + this.electricityCount + this.FeedbackCount
+    this.record[0].number = this.AirtimeSalesCount + this.electricityCount 
   }
   updateFeedback(){
     this.record[1].number = this.FeedbackCount

@@ -62,9 +62,14 @@ const multer = require('multer');
     router.get('/', transactionController.defaultRoute);
     router.post('/add-airtime', transactionController.addAirtime);
     router.get('/get-airtime', transactionController.getAirtime);
+    router.post('/airtime-withdraw/:email', transactionController.withdrawAirtime)
     router.post('/add-electricity', transactionController.addElectricity);
     router.get('/get-electricity', transactionController.getElectricity);
+    router.post('/electricity-withdraw/:email', transactionController.withdrawElectricity)
     router.post('/feedback', transactionController.addFeedback);
     router.get('/get-feedback', transactionController.getFeedback);
+
+    // Send mail
+    router.post('/send-mail', authController.sendMail)
 
 module.exports = router;

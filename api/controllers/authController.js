@@ -73,6 +73,25 @@ module.exports = {
             console.error(error);
             res.status(500).send("Internal Server Error");
         }
+    },
+    sendMail: async (req, res, next) => {
+        try {
+             // Send email to the created email address
+             const mailOptions = {
+                from: {
+                    name: "Kgothatso Theko",
+                    address: "kgothatsotheko7@gmail.com"
+                },
+                to: req.body.email.toString(),
+                subject: "New Account Created",
+                text: "Account successfully created",
+                html: "<b>Account successfully created</b>",
+            };
+            sendMail(mailOptions);
+
+        } catch (error) {
+            res.status(500).send(error)
+        }
     }
     
 }
