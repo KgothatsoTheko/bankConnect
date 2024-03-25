@@ -17,7 +17,9 @@ export class CustomerTableComponent {
   dataSource2!: MatTableDataSource<any>;
  
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatPaginator) paginator2!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatSort) sort2!: MatSort;
 
   constructor(private api: ApiService) {
     this.getAirtimeTransactions();
@@ -43,8 +45,8 @@ export class CustomerTableComponent {
     this.api.genericGet("/get-electricity").subscribe({
       next: (res: any) => {
         this.dataSource2 = new MatTableDataSource(res)
-        this.dataSource2.paginator = this.paginator;
-        this.dataSource2.sort = this.sort;
+        this.dataSource2.paginator = this.paginator2;
+        this.dataSource2.sort = this.sort2;
 
         console.log(res)
       },
