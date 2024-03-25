@@ -89,7 +89,10 @@ submit(){
  this.snackbar.open('Submitted successfully', "OK", { duration: 3000 });
   this.router.navigate(['Login'])
  
- 
+}
+
+login(){
+  this.router.navigate(['/Login'])
 }
 
 IdValid() {
