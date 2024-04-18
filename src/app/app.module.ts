@@ -44,6 +44,7 @@ import { ReportzComponent } from './components/reportz/reportz.component';
 import { ReportBarComponent } from './charts/report-bar/report-bar.component';
 import { ReportChartComponent } from './charts/report-chart/report-chart.component';
 import { SurveysComponent } from './popUp/surveys/surveys.component';
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { SurveysComponent } from './popUp/surveys/surveys.component';
     ReportzComponent,
     ReportBarComponent,
     ReportChartComponent,
-    SurveysComponent
+    SurveysComponent,
+    ForgetPasswordComponent
   ],
   imports: [
     BrowserModule,
